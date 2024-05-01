@@ -40,14 +40,18 @@ public class Controller {
         player.move();
     }
 
+    boolean meet(player, thing) {
+
+    }
 
     /**
      * 角色与滑块交互
      */
     void intereact() {
         for(Thing thing : things) {
-            if(player.interact(thing)) {
+            if(meet(player, thing)) {
                 // 角色与滑块交互
+                player.react(thing.intereact(player))
             }
         }
     }
