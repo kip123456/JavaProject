@@ -1,5 +1,9 @@
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.Graphics;
 
 public class Player {

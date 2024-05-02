@@ -2,6 +2,9 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 public abstract class Thing {
     protected int posx,posy;
     BufferedImage myImage;
