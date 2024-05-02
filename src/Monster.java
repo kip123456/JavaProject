@@ -1,5 +1,5 @@
 public class Monster extends Thing {
-    int catagory,hel,atk,def,skill,posx,posy;
+    int catagory,hel,atk,def,skill;
     public Monster(int id,int _posx,int _posy){
         hel = DataManager.monster_data[id][0];
         atk = DataManager.monster_data[id][1];

@@ -77,7 +77,7 @@ public class Controller {
         }//hel generate
         else
         {
-            things.add(new Monster((random_num-10)/(90/DataManager.monster_num), road_id, 0));
+            things.add(new Monster((random_num-11)/(90/DataManager.monster_num), road_id, 0));
         }//monster generate
     }
     void generateThings() {
