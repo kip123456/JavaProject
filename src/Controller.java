@@ -55,7 +55,7 @@ public class Controller {
             }
         }
     }
-
+ 
 
     /**
      * 判断游戏是否结束（或者之类的？）
