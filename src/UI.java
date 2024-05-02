@@ -93,8 +93,9 @@ class MyJPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        paintChannels(g);
-        Controller.repaint(g);
+        // paintChannels(g);
+        new Monster(1, 1, 50).repaint(g);
+        // Controller.repaint(g);
     }
     MyJPanel() {
         super();

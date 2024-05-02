@@ -5,6 +5,7 @@ public class Monster extends Thing {
         atk = DataManager.monster_data[id][1];
         def = DataManager.monster_data[id][2];
         skill = DataManager.monster_data[id][3];
+        myImage = DataManager.monster_img[id];
         posx=_posx;
         posy=_posy;
     }

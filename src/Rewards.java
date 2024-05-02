@@ -4,17 +4,18 @@ public class Rewards extends Thing{
     {
         catagory = _catagory;
         hel = atk = def = mdef = 0;
-        if(catagory == 1){
-            hel = number;
+        myImage = DataManager.reward_img[catagory][number];
+        if(catagory == 0){
+            hel = number*50;
         }
-        else if(catagory == 2){
+        else if(catagory == 1){
             atk = number;
         }
-        else if(catagory == 3){
+        else if(catagory == 2){
             def = number;
         }
-        else if(catagory == mdef){
-            mdef = number;
+        else if(catagory == 3){
+            mdef = number*5;
         }
     }
     public T2PMessage interact(Player p)

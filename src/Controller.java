@@ -10,6 +10,12 @@ public class Controller {
 
     UI ui;
 
+    /**
+     * 0 没有结束
+     * 1 玩家胜利
+     * 2 玩家失败
+     */
+    int gameover = 0;
     Lock wasd_lock;
     char wasd = ' ';
 
@@ -23,13 +29,23 @@ public class Controller {
      */
     List<Thing> things;
 
+    /**
+     * 0: 无尽模式
+     * 否则: 其他模式
+     */
+    int gamemode = 0;
+
+    
+    int ticks_already = 0;
+
     void work() {
-        while(true) {
+        while(!gameover) {
             moveThing();
             generateThings();
             moveCharacter();
             intereact();
             judge();
+            ++ticks_already;
             try{
                 Thread.sleep(1000/Global.TICK_PER_SEC);
             }catch(Exception e){}
@@ -39,10 +55,34 @@ public class Controller {
     /**
      * 产生新的滑块
      */
+    int lst_gen = 0;
+    void generateThings(int road_id)
+    {
+        
+    }
     void generateThings() {
-        // for(road ...) {
-        //     things.add(new Thing(.......))
-        // }
+        if(lst_gen != 0)
+        {
+            --lst_gen;
+            return;
+        }
+        lst_gen = Global.GENERATE_PADDING;
+        Random rand = new Random();
+        if(gamemode == 0)
+        {
+            int random_num = rand.nextInt(15);
+            for(int i=0,j=1;i<=3;++i,j<<=1)
+            {
+                if((j&random_num)>0)
+                {
+                    generateThings(i);
+                }
+            }
+        }
+        else
+        {
+
+        }
     }
 
     /**
@@ -102,7 +142,24 @@ public class Controller {
      * 判断游戏是否结束（或者之类的？）
      */
     void judge() {
+        int all_ticks = 10;
+        switch (gamemode) {
+            case 0:
+                all_ticks = ticks_already + 1000;
+                break;
+            default:
+                all_ticks = 100000;
+                break;
+        }
 
+        if(player.health <=0) {
+            System.out.println("Game Over!");
+            gameover = 2;
+        }
+        else if(ticks_already >= all_ticks) {
+            System.out.println("Game Over!");
+            gameover = 1;
+        }
     }
 
 
