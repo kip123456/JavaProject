@@ -34,37 +34,38 @@ public class Player {
     public void move(MovingState direc) {
 
         switch (direc) {
-            case value:
-                
+            case UP:
+                udSteps = Global.TICKS_PER_PLAYER_MOVE;
                 break;
-        
+            case DOWN:
+                udSteps = -Global.TICKS_PER_PLAYER_MOVE;
+                break;
+            case LEFT:
+                lrSteps = -Global.TICKS_PER_PLAYER_MOVE;
+                break;
+            case RIGHT:
+                lrSteps = Global.TICKS_PER_PLAYER_MOVE;
+                break;
+            case STOP:
+                if(udSteps == 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
             default:
                 break;
         }
-
-        if(state != MovingState.STOP) {
-            System.out.println("moving");
-            leftSteps--;
-            switch (state) {
-                case DOWN:
-                    posz--;
-                    break;
-                case UP:
-                    posz++;
-                    break;
-                case LEFT:
-                    posx --;
-                    break;
-                case RIGHT:
-                    posx ++;
-                    break;
-                default:
-                    break;
-
-            }
-            if(leftSteps == 0) {
-                state = MovingState.STOP;
-            }
+        if(lrSteps <0) {
+            if(posx > 0) posx --;
+            ++lrSteps;
+        }
+        if(lrSteps >0) {
+            if(posx < Global.CHANNEL_COUNT*Global.CHANNEL_WIDTH) posx ++;
+            --lrSteps;
+        }
+        if(udSteps <0) {
+            if(posz>0) posz --;
+            ++udSteps;
+        }
+        if(udSteps >0) {
+            if(posz < Global.MAX_PLAYER_JUMP) posz ++;
+            --udSteps;
         }
     }
 

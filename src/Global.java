@@ -7,4 +7,5 @@ public class Global {
     public static final int CHANNEL_PADDING=100;
     public static final int GENERATE_PADDING=25;
     public static final int TICKS_PER_PLAYER_MOVE = 4;
+    public static final int MAX_PLAYER_JUMP = 10;
 }
