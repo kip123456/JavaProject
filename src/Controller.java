@@ -22,12 +22,12 @@ public class Controller {
     /**
      * 角色
      */
-    Player player;
+    Player player = new Player();
 
     /**
      * 存放滑块的集合
      */
-    List<Thing> things;
+    List<Thing> things = new LinkedList<>();
 
     /**
      * 0: 无尽模式
@@ -38,6 +38,11 @@ public class Controller {
 
     
     int ticks_already = 0;
+    public Controller() {
+        super();
+        ui = new UI(this);
+    }
+    
 
     void work() {
         while(gameover == 0) {
@@ -114,19 +119,19 @@ public class Controller {
         wasd_lock.lock();
         switch (wasd) {
             case 'w':
-                player.move(Global.MovingState.UP);
+                player.move(MovingState.UP);
                 break;
             case 's':
-                player.move(Global.MovingState.DOWN);
+                player.move(MovingState.DOWN);
                 break;
             case 'a':
-                player.move(Global.MovingState.LEFT);
+                player.move(MovingState.LEFT);
                 break;
             case 'd':
-                player.move(Global.MovingState.RIGHT);
+                player.move(MovingState.RIGHT);
                 break;
             default:
-                player.move(Global.MovingState.STOP);
+                player.move(MovingState.STOP);
                 break;
         }
         wasd_lock.unlock();

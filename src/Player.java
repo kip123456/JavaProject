@@ -5,7 +5,7 @@ import java.awt.Graphics;
 public class Player {
     int health, defense, attack, magicDefense;
     int posx, posy, posz;
-    Global.MovingState state;
+    MovingState state;
     int leftSteps;
     BufferedImage myImage;
     public Player() {
@@ -13,11 +13,13 @@ public class Player {
         defense = 10;
         attack = 10;
         magicDefense = 10;
-        state = Global.MovingState.STOP;
+        state = MovingState.STOP;
         posx = 0;
         posy = 150;
         posz = 0;
+        System.out.println("Player reach here\n");
         myImage = DataManager.player_img;
+        System.out.println("player leave here\n");
     }
     public void react(T2PMessage msg) {
         health += msg.hel;
@@ -25,30 +27,30 @@ public class Player {
         defense += msg.def;
         magicDefense += msg.mdef;
     }
-    public void move(Global.MovingState direc) {
+    public void move(MovingState direc) {
 
-        if(state == Global.MovingState.STOP && posz > 0) {
+        if(state == MovingState.STOP && posz > 0) {
             leftSteps = 4;
-            state = Global.MovingState.DOWN;           
+            state = MovingState.DOWN;           
         }
 
-        if(state == Global.MovingState.STOP && direc != Global.MovingState.STOP) {
-            if(direc == Global.MovingState.DOWN && posz > 0) {
+        if(state == MovingState.STOP && direc != MovingState.STOP) {
+            if(direc == MovingState.DOWN && posz > 0) {
                 leftSteps = Global.TICKS_PER_PLAYER_MOVE;
-                state = Global.MovingState.DOWN;
-            } else if (direc == Global.MovingState.UP && posz == 0) {
+                state = MovingState.DOWN;
+            } else if (direc == MovingState.UP && posz == 0) {
                 leftSteps = Global.TICKS_PER_PLAYER_MOVE;
-                state = Global.MovingState.UP;
-            } else if (direc == Global.MovingState.LEFT && posx > 0) {
+                state = MovingState.UP;
+            } else if (direc == MovingState.LEFT && posx > 0) {
                 leftSteps = Global.TICKS_PER_PLAYER_MOVE;
-                state = Global.MovingState.LEFT;
-            } else if (direc == Global.MovingState.RIGHT && posx < Global.CHANNEL_WIDTH * Global.CHANNEL_COUNT) {
+                state = MovingState.LEFT;
+            } else if (direc == MovingState.RIGHT && posx < Global.CHANNEL_WIDTH * Global.CHANNEL_COUNT) {
                 leftSteps = Global.TICKS_PER_PLAYER_MOVE;
-                state = Global.MovingState.RIGHT;
+                state = MovingState.RIGHT;
             }
         }
 
-        if(state != Global.MovingState.STOP) {
+        if(state != MovingState.STOP) {
             leftSteps--;
             switch (state) {
                 case DOWN:
@@ -68,7 +70,7 @@ public class Player {
 
             }
             if(leftSteps == 0) {
-                state = Global.MovingState.STOP;
+                state = MovingState.STOP;
             }
         }
     }

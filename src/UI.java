@@ -15,7 +15,7 @@ public class UI {
     UI(Controller controller) {
         this.controller = controller;
         frame = new JFrame("JAVA Project");
-        panel = new MyJPanel();
+        panel = new MyJPanel(controller);
         frame.add(panel);
         frame.setSize(Global.WINDOW_WIDTH, Global.WINDOW_WIDTH);
 
@@ -50,13 +50,11 @@ public class UI {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    public static void main(String[] args) {
-        new UI();
-    }
 }
 
 
 class MyJPanel extends JPanel {
+    Controller controller;
 
     static class Line {
         Point p1, p2;
@@ -94,11 +92,16 @@ class MyJPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         // paintChannels(g);
-        new Monster(1, 1, 50).repaint(g);
+        // new Monster(1, 1, 50).repaint(g);
         // Controller.repaint(g);
+        for(Thing thing: controller.things) {
+            thing.repaint(g);
+        }
+        controller.player.repaint(g);
     }
-    MyJPanel() {
+    MyJPanel(Controller controller) {
         super();
+        this.controller = controller;
         setBackground(Color.WHITE);
         for(int i = 0; i <= Global.CHANNEL_COUNT; i++) {
             lines[i] = new Line(
