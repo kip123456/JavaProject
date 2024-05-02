@@ -17,7 +17,7 @@ public class Controller {
      */
     int gameover = 0;
     Lock wasd_lock = new ReentrantLock();
-    char wasd = ' ';
+    char wKey = ' ' , adKey = ' ';
 
     /**
      * 角色
@@ -132,32 +132,23 @@ public class Controller {
      */
     void moveCharacter() {
         wasd_lock.lock();
-        if(player.udSteps!=0||player.lrSteps!=0)
-        {
-            player.move(MovingState.STOP);
+        if (wKey == 'w') {
+            player.setMove(MovingState.UP);
         }
-        else switch (wasd) {
-            case 'w':
-                    player.move(MovingState.UP);
-                break;
-            case 's':
-                    player.move(MovingState.DOWN);
-                break;
-            case 'a':
-                    player.move(MovingState.LEFT);
-                break;
-            case 'd':
-                    player.move(MovingState.RIGHT);
-                break;
-            default:
-                    player.move(MovingState.STOP);
-                break;
+        if(adKey == 'a'){
+            player.setMove(MovingState.LEFT);
         }
-        wasd = ' ';
+        if(adKey == 'd'){
+            player.setMove(MovingState.RIGHT);
+        }
+        player.move();
+        wKey = adKey = ' ';
         wasd_lock.unlock();
     }
 
     boolean meet(Player player, Thing thing) {
+        if((player.udSteps != 0 || player.posz > 0 )&& thing.haveHeight==false)
+            return false;
         return player.transRectangle().intersects(thing.transPos());
     }
 

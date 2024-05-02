@@ -8,9 +8,10 @@ import javax.swing.SwingUtilities;
 public abstract class Thing {
     protected int posx,posy;
     BufferedImage myImage;
+    boolean haveHeight=false;
     public void move()
     {
-        posy++;
+        posy+=4;
     }
     abstract T2PMessage interact(Player p);
     public Rectangle transPos()

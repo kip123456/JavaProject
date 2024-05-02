@@ -24,24 +24,18 @@ public class UI {
             @Override
             public void keyTyped(KeyEvent e) {
                 controller.wasd_lock.lock();
-                controller.wasd = ' ';
-                if(controller.wasd == ' ') {
-                    switch (e.getKeyChar()) {
-                        case 'w':
-                            controller.wasd = 'w';
-                            break;
-                        case 'a':
-                            controller.wasd = 'a';
-                            break;
-                        case 's':
-                            controller.wasd = 's';
-                            break;
-                        case 'd':
-                            controller.wasd = 'd';
-                            break;
-                        default:
-                            break;
-                    }
+                switch (e.getKeyChar()) {
+                    case 'w':
+                        controller.wKey = 'w';
+                        break;
+                    case 'a':
+                        controller.adKey = 'a';
+                        break;
+                    case 'd':
+                        controller.adKey = 'd';
+                        break;
+                    default:
+                        break;
                 }
                 controller.wasd_lock.unlock();
             }

@@ -29,25 +29,26 @@ public class Player {
         defense += msg.def;
         magicDefense += msg.mdef;
     }
-    public void move(MovingState direc) {
-
+    public void setMove(MovingState direc)
+    {
         switch (direc) {
             case UP:
+                if(udSteps == 0 && posz == 0)
                 udSteps = Global.TICKS_PER_PLAYER_MOVE;
                 break;
-            case DOWN:
-                udSteps = -Global.TICKS_PER_PLAYER_MOVE;
-                break;
             case LEFT:
+                if(lrSteps == 0)
                 lrSteps = -Global.TICKS_PER_PLAYER_MOVE;
                 break;
             case RIGHT:
+                if(lrSteps == 0)
                 lrSteps = Global.TICKS_PER_PLAYER_MOVE;
                 break;
             default:
                 break;
         }
-        
+    }
+    public void move() {
         if(udSteps == 0 && posz > 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
 
         if(lrSteps <0) {
@@ -69,7 +70,7 @@ public class Player {
     }
 
     Rectangle transRectangle() {
-        return new Rectangle(posx*25+300,posy*4+44 - posz*4,50,50);
+        return new Rectangle(posx*25+325,posy*4+44 - posz*4,50,50);
     }
 
     void repaint(Graphics g)
