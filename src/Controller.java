@@ -23,6 +23,8 @@ public class Controller {
      */
     List<Thing> things;
 
+    int gamemode = 0;
+
     void work() {
         while(true) {
             moveThing();
@@ -39,10 +41,34 @@ public class Controller {
     /**
      * 产生新的滑块
      */
+    int lst_gen = 0;
+    void generateThings(int road_id)
+    {
+        
+    }
     void generateThings() {
-        // for(road ...) {
-        //     things.add(new Thing(.......))
-        // }
+        if(lst_gen != 0)
+        {
+            --lst_gen;
+            return;
+        }
+        lst_gen = Global.GENERATE_PADDING;
+        Random rand = new Random();
+        if(gamemode == 0)
+        {
+            int random_num = rand.nextInt(15);
+            for(int i=0,j=1;i<=3;++i,j<<=1)
+            {
+                if((j&random_num)>0)
+                {
+                    generateThings(i);
+                }
+            }
+        }
+        else
+        {
+
+        }
     }
 
     /**
@@ -81,8 +107,8 @@ public class Controller {
     }
 
     boolean meet(Player player, Thing thing) {
-        return Math.abs(player.transRectangle().getX() - thing.transRectangle().getX()) < 10
-            && Math.abs(player.transRectangle().getY() - thing.transRectangle().getY()) < 10;
+        return Math.abs(player.transRectangle().getX() - thing.transPos().getX()) < 10
+            && Math.abs(player.transRectangle().getY() - thing.transPos().getY()) < 10;
     }
 
     /**
