@@ -3,7 +3,7 @@ import java.awt.Graphics;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
-import java.util. *;
+import java.util.*;
 
 
 public class Controller {
@@ -24,6 +24,7 @@ public class Controller {
     List<Thing> things;
 
     int gamemode = 0;
+    Random rand = new Random(System.currentTimeMillis());
 
     void work() {
         while(true) {
@@ -44,7 +45,19 @@ public class Controller {
     int lst_gen = 0;
     void generateThings(int road_id)
     {
-        
+        int random_num = rand.nextInt(100)+1;//[1,100]
+        if(random_num<=2)
+        {
+            things.add(new Rewards(random_num/2, 0,road_id,0));
+        }//atk or def or mdef generate
+        else if(random_num<=10)
+        {
+            things.add(new Rewards(random_num/2, 0,road_id,0));
+        }//hel generate
+        else
+        {
+            things.add(new Monster((random_num-10)/(90/DataManager.monster_num), road_id, 0));
+        }//monster generate
     }
     void generateThings() {
         if(lst_gen != 0)
@@ -53,7 +66,6 @@ public class Controller {
             return;
         }
         lst_gen = Global.GENERATE_PADDING;
-        Random rand = new Random();
         if(gamemode == 0)
         {
             int random_num = rand.nextInt(15);
