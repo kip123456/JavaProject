@@ -1,8 +1,10 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public abstract class Thing {
     protected int posx,posy;
+    BufferedImage myImage;
     public void move()
     {
         posy++;
@@ -14,6 +16,7 @@ public abstract class Thing {
     }
     public void repaint(Graphics g)
     {
-        
+        Rectangle rect = transPos();
+        g.drawImage(myImage, rect.x, rect.y, rect.width, rect.height, null);
     }
 }

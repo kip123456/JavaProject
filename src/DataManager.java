@@ -23,6 +23,7 @@ public class DataManager{
         }
         path = Path.monsterImg;
         try{
+            monster_img = new BufferedImage[monster_num];
             for(int i=0;i<monster_num;++i){
                 monster_img[i] = ImageIO.read(new File(path+"/"+i+".png"));
             }
