@@ -70,7 +70,7 @@ public class Controller {
     /**
      * 重绘ui
      */
-    public void repaint(Graphics g){
+    static public void repaint(Graphics g){
         for(Thing thing : things) {
             thing.repaint(g);
         }

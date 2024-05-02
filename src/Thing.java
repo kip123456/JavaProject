@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 public abstract class Thing {
     protected int posx,posy;
     public void move()
@@ -5,7 +7,7 @@ public abstract class Thing {
         posy++;
     }
     abstract T2PMessage interact(Player p);
-    public void paint()
+    public void repaint(Graphics g)
     {
         
     }
