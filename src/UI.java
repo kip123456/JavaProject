@@ -1,19 +1,52 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
 public class UI {
     JFrame frame;
     MyJPanel panel;
+    Controller controller;
     void repaint() {
         panel.repaint();
     }
-    UI() {
+    UI(Controller controller) {
+        this.controller = controller;
         frame = new JFrame("JAVA Project");
         panel = new MyJPanel();
         frame.add(panel);
         frame.setSize(Global.WINDOW_WIDTH, Global.WINDOW_WIDTH);
+
+        // 监听键盘输入wasd
+        frame.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                controller.wasd_lock.lock();
+                if(controller.wasd == ' ') {
+                    switch (e.getKeyChar()) {
+                        case 'w':
+                            controller.wasd = 'w';
+                            break;
+                        case 'a':
+                            controller.wasd = 'a';
+                            break;
+                        case 's':
+                            controller.wasd = 's';
+                            break;
+                        case 'd':
+                            controller.wasd = 'd';
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                controller.wasd_lock.unlock();
+            }
+        });
+
+
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

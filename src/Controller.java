@@ -1,4 +1,15 @@
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.Condition;
+import java.util. *;
+
+
 public class Controller {
+
+    UI ui;
+
+    Lock wasd_lock;
+    char wasd = ' ';
 
     /**
      * 角色
@@ -11,16 +22,25 @@ public class Controller {
     List<Thing> things;
 
     void work() {
-
+        while(true) {
+            moveThing();
+            generateThings();
+            moveCharacter();
+            intereact();
+            judge();
+            try{
+                Thread.sleep(1000/Global.TICK_PER_SEC);
+            }catch(Exception e){}
+        }
     }
 
     /**
      * 产生新的滑块
      */
     void generateThings() {
-        for(road ...) {
-            things.add(new Thing(.......))
-        }
+        // for(road ...) {
+        //     things.add(new Thing(.......))
+        // }
     }
 
     /**
@@ -37,11 +57,30 @@ public class Controller {
      * 角色移动
      */
     void moveCharacter() {
-        player.move();
+        wasd_lock.lock();
+        switch (wasd) {
+            case 'w':
+                player.move(Global.MovingState.UP);
+                break;
+            case 's':
+                player.move(Global.MovingState.DOWN);
+                break;
+            case 'a':
+                player.move(Global.MovingState.LEFT);
+                break;
+            case 'd':
+                player.move(Global.MovingState.RIGHT);
+                break;
+            default:
+                player.move(Global.MovingState.STOP);
+                break;
+        }
+        wasd_lock.unlock();
     }
 
-    boolean meet(player, thing) {
-
+    boolean meet(Player player, Thing thing) {
+        return Math.abs(player.transRectangle().getX() - thing.transRectangle().getX()) < 10
+            && Math.abs(player.transRectangle().getY() - thing.transRectangle().getY()) < 10;
     }
 
     /**
@@ -51,7 +90,7 @@ public class Controller {
         for(Thing thing : things) {
             if(meet(player, thing)) {
                 // 角色与滑块交互
-                player.react(thing.intereact(player))
+                player.react(thing.interact(player));
             }
         }
     }
@@ -69,10 +108,6 @@ public class Controller {
      * 重绘ui
      */
     void repaint() {
-        for(Thing thing : things) {
-            thing.repaint();
-        }
-        player.repaint();
-        。。。。。
+        ui.repaint();
     }
 }

@@ -1,3 +1,5 @@
+import java.awt.Rectangle;
+
 public class Player {
     int health, defense, attack, magicDefense;
     int posx, posy, posz;
@@ -9,6 +11,9 @@ public class Player {
         attack = 10;
         magicDefense = 10;
         state = Global.MovingState.STOP;
+        posx = 0;
+        posy = 150;
+        posz = 0;
     }
     public void react(T2PMessage msg) {
         health += msg.hel;
@@ -17,6 +22,12 @@ public class Player {
         magicDefense += msg.mdef;
     }
     public void move(Global.MovingState direc) {
+
+        if(state == Global.MovingState.STOP && posz > 0) {
+            leftSteps = 4;
+            state = Global.MovingState.DOWN;           
+        }
+
         if(state == Global.MovingState.STOP && direc != Global.MovingState.STOP) {
             if(direc == Global.MovingState.DOWN && posz > 0) {
                 leftSteps = 4;
@@ -32,6 +43,7 @@ public class Player {
                 state = Global.MovingState.RIGHT;
             }
         }
+
         if(state != Global.MovingState.STOP) {
             leftSteps--;
             switch (state) {
@@ -55,6 +67,10 @@ public class Player {
                 state = Global.MovingState.STOP;
             }
         }
+    }
+
+    Rectangle transRectangle() {
+        return new Rectangle(posx*25+300,posy*4+44,100,50);
     }
 
 }
