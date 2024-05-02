@@ -8,6 +8,7 @@ public class DataManager{
     static public int[][] monster_data;
     static public BufferedImage[] monster_img;
     static public BufferedImage[][] reward_img;
+    static public BufferedImage player_img;
     static{
         String path = Path.monsterData;
         
@@ -44,6 +45,12 @@ public class DataManager{
             for(int i=5;i<=8;++i){
                 reward_img[0][i-5] = ImageIO.read(new File(path+"/103-0"+i+".png"));
             }
+        }catch(Exception e){
+            System.out.println("reward img read error");
+        }
+        path = Path.playerImg;
+        try{
+            player_img = ImageIO.read(new File(path));
         }catch(Exception e){
             System.out.println("reward img read error");
         }

@@ -39,7 +39,7 @@ public class Controller {
     int ticks_already = 0;
 
     void work() {
-        while(!gameover) {
+        while(gameover == 0) {
             moveThing();
             generateThings();
             moveCharacter();

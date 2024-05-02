@@ -1,10 +1,13 @@
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
 
 public class Player {
     int health, defense, attack, magicDefense;
     int posx, posy, posz;
     Global.MovingState state;
     int leftSteps;
+    BufferedImage myImage;
     public Player() {
         health = 100;
         defense = 10;
@@ -14,6 +17,7 @@ public class Player {
         posx = 0;
         posy = 150;
         posz = 0;
+        myImage = DataManager.player_img;
     }
     public void react(T2PMessage msg) {
         health += msg.hel;
@@ -71,6 +75,12 @@ public class Player {
 
     Rectangle transRectangle() {
         return new Rectangle(posx*25+300,posy*4+44,100,50);
+    }
+
+    void repaint(Graphics g)
+    {
+        Rectangle rect = transRectangle();
+        g.drawImage(myImage, rect.x, rect.y, rect.width, rect.height, null);
     }
 
 }
