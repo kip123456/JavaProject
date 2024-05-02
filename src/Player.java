@@ -21,9 +21,7 @@ public class Player {
         posx = 0;
         posy = 150;
         posz = 0;
-        System.out.println("Player reach here\n");
         myImage = DataManager.player_img;
-        System.out.println("player leave here\n");
     }
     public void react(T2PMessage msg) {
         health += msg.hel;
@@ -46,17 +44,18 @@ public class Player {
             case RIGHT:
                 lrSteps = Global.TICKS_PER_PLAYER_MOVE;
                 break;
-            case STOP:
-                if(udSteps == 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
             default:
                 break;
         }
+        
+        if(udSteps == 0 && posz > 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
+
         if(lrSteps <0) {
             if(posx > 0) posx --;
             ++lrSteps;
         }
         if(lrSteps >0) {
-            if(posx < Global.CHANNEL_COUNT*Global.CHANNEL_WIDTH) posx ++;
+            if(posx < (Global.CHANNEL_COUNT-1)*Global.CHANNEL_WIDTH) posx ++;
             --lrSteps;
         }
         if(udSteps <0) {
@@ -70,7 +69,7 @@ public class Player {
     }
 
     Rectangle transRectangle() {
-        return new Rectangle(posx*25+300,posy*4+44,50,50);
+        return new Rectangle(posx*25+300,posy*4+44 - posz*4,50,50);
     }
 
     void repaint(Graphics g)
