@@ -77,10 +77,6 @@ class MyJPanel extends JPanel {
      * @param p
      * @return
      */
-    Point transPoint(Point p) {
-
-        return new Point(p.x *37 + Global.CHANNEL_PADDING, p.y*3 + Global.CHANNEL_PADDING);
-    }
     void paintChannels(Graphics g) {
         for (int i = 0; i < Global.CHANNEL_COUNT; i++) {
             g.setColor(Color.GRAY);
@@ -105,8 +101,8 @@ class MyJPanel extends JPanel {
         setBackground(Color.WHITE);
         for(int i = 0; i <= Global.CHANNEL_COUNT; i++) {
             lines[i] = new Line(
-                transPoint(new Point(i*Global.CHANNEL_WIDTH, 0)),
-                transPoint(new Point(i*Global.CHANNEL_WIDTH, Global.CHANNEL_HEIGHT))
+                new Point(i*Global.CHANNEL_WIDTH, 0),
+                new Point(i*Global.CHANNEL_WIDTH, Global.CHANNEL_HEIGHT)
             );
         }
     }

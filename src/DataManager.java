@@ -52,7 +52,7 @@ public class DataManager{
         try{
             player_img = ImageIO.read(new File(path));
         }catch(Exception e){
-            System.out.println("reward img read error");
+            System.out.println("player img read error");
         }
     }
 }

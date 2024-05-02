@@ -16,7 +16,7 @@ public class Controller {
      * 2 玩家失败
      */
     int gameover = 0;
-    Lock wasd_lock;
+    Lock wasd_lock = new ReentrantLock();
     char wasd = ' ';
 
     /**
@@ -51,6 +51,7 @@ public class Controller {
             moveCharacter();
             intereact();
             judge();
+            repaint();
             ++ticks_already;
             try{
                 Thread.sleep(1000/Global.TICK_PER_SEC);
@@ -64,14 +65,15 @@ public class Controller {
     int lst_gen = 0;
     void generateThings(int road_id)
     {
+        System.out.println(road_id);
         int random_num = rand.nextInt(100)+1;//[1,100]
-        if(random_num<=2)
+        if(random_num<=6)
         {
             things.add(new Rewards(random_num/2, 0,road_id,0));
         }//atk or def or mdef generate
         else if(random_num<=10)
         {
-            things.add(new Rewards(random_num/2, 0,road_id,0));
+            things.add(new Rewards(0, 0,road_id,0));
         }//hel generate
         else
         {
