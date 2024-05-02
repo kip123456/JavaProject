@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 public class Controller {
 
     /**
@@ -68,11 +70,10 @@ public class Controller {
     /**
      * 重绘ui
      */
-    void repaint() {
+    public void repaint(Graphics g){
         for(Thing thing : things) {
-            thing.repaint();
+            thing.repaint(g);
         }
-        player.repaint();
-        。。。。。
+        player.repaint(g);
     }
 }

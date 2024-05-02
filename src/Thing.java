@@ -5,4 +5,8 @@ public abstract class Thing {
         posy++;
     }
     abstract T2PMessage interact(Player p);
+    public void paint()
+    {
+        
+    }
 }
