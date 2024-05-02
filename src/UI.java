@@ -94,6 +94,7 @@ class MyJPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         paintChannels(g);
+        Controller.repaint(g);
     }
     MyJPanel() {
         super();
