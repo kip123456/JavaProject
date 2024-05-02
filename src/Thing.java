@@ -1,3 +1,3 @@
-public class Thing {
-    int catagory,hel,atk,def,mdef;
+public interface Thing {
+    T2PMessage interact(Player p);
 }
