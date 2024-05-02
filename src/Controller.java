@@ -151,6 +151,7 @@ public class Controller {
                     player.move(MovingState.RIGHT);
                 break;
             default:
+                    player.move(MovingState.STOP);
                 break;
         }
         wasd = ' ';

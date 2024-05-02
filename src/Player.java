@@ -44,11 +44,12 @@ public class Player {
             case RIGHT:
                 lrSteps = Global.TICKS_PER_PLAYER_MOVE;
                 break;
-            case STOP:
-                if(udSteps == 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
             default:
                 break;
         }
+        
+        if(udSteps == 0 && posz > 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
+
         if(lrSteps <0) {
             if(posx > 0) posx --;
             ++lrSteps;
@@ -68,7 +69,7 @@ public class Player {
     }
 
     Rectangle transRectangle() {
-        return new Rectangle(posx*25+300,posy*4+44,100,50);
+        return new Rectangle(posx*25+300,posy*4+44 - posz*4,100,50);
     }
 
     void repaint(Graphics g)
