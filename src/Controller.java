@@ -1,5 +1,5 @@
 import java.awt.Graphics;
-
+import java.awt.Rectangle;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
@@ -46,8 +46,8 @@ public class Controller {
 
     void work() {
         while(gameover == 0) {
-            removeThings();
             moveThing();
+            removeThings();
             generateThings();
             moveCharacter();
             intereact();
@@ -66,7 +66,6 @@ public class Controller {
     int lst_gen = 0;
     void generateThings(int road_id)
     {
-        System.out.println(road_id);
         int random_num = rand.nextInt(100)+1;//[1,100]
         if(random_num<=6)
         {
@@ -158,18 +157,20 @@ public class Controller {
     }
 
     boolean meet(Player player, Thing thing) {
-        return Math.abs(player.transRectangle().getX() - thing.transPos().getX()) < 10
-            && Math.abs(player.transRectangle().getY() - thing.transPos().getY()) < 10;
+        return player.transRectangle().intersects(thing.transPos());
     }
 
     /**
      * 角色与滑块交互
      */
     void intereact() {
-        for(Thing thing : things) {
+        for(int i=0;i<things.size();++i) {
+            Thing thing = things.get(i);
             if(meet(player, thing)) {
                 // 角色与滑块交互
                 player.react(thing.interact(player));
+                things.remove(i);
+                --i;
             }
         }
     }

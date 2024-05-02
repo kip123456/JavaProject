@@ -70,7 +70,7 @@ public class Player {
     }
 
     Rectangle transRectangle() {
-        return new Rectangle(posx*25+300,posy*4+44,100,50);
+        return new Rectangle(posx*25+300,posy*4+44,50,50);
     }
 
     void repaint(Graphics g)
