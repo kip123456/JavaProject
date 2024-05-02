@@ -9,15 +9,15 @@ import java.awt.Graphics;
 public class Player {
     int health, defense, attack, magicDefense;
     int posx, posy, posz;
-    MovingState state;
-    int leftSteps;
+    int lrSteps;
+    int udSteps;
     BufferedImage myImage;
     public Player() {
         health = 100;
         defense = 10;
         attack = 10;
         magicDefense = 10;
-        state = MovingState.STOP;
+        lrSteps = udSteps = 0;
         posx = 0;
         posy = 150;
         posz = 0;
@@ -33,28 +33,17 @@ public class Player {
     }
     public void move(MovingState direc) {
 
-        if(state == MovingState.STOP && posz > 0) {
-            leftSteps = 4;
-            state = MovingState.DOWN;           
-        }
-
-        if(state == MovingState.STOP && direc != MovingState.STOP) {
-            if(direc == MovingState.DOWN && posz > 0) {
-                leftSteps = Global.TICKS_PER_PLAYER_MOVE;
-                state = MovingState.DOWN;
-            } else if (direc == MovingState.UP && posz == 0) {
-                leftSteps = Global.TICKS_PER_PLAYER_MOVE;
-                state = MovingState.UP;
-            } else if (direc == MovingState.LEFT && posx > 0) {
-                leftSteps = Global.TICKS_PER_PLAYER_MOVE;
-                state = MovingState.LEFT;
-            } else if (direc == MovingState.RIGHT && posx < Global.CHANNEL_WIDTH * Global.CHANNEL_COUNT) {
-                leftSteps = Global.TICKS_PER_PLAYER_MOVE;
-                state = MovingState.RIGHT;
-            }
+        switch (direc) {
+            case value:
+                
+                break;
+        
+            default:
+                break;
         }
 
         if(state != MovingState.STOP) {
+            System.out.println("moving");
             leftSteps--;
             switch (state) {
                 case DOWN:
