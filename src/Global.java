@@ -5,4 +5,11 @@ public class Global {
     public static final int CHANNEL_COUNT = 4;
     public static final int WINDOW_WIDTH = 800;
     public static final int CHANNEL_PADDING=100;
+    public static enum MovingState {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT,
+        STOP
+    }
 }
