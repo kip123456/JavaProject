@@ -46,6 +46,7 @@ public class Controller {
 
     void work() {
         while(gameover == 0) {
+            removeThings();
             moveThing();
             generateThings();
             moveCharacter();
@@ -101,6 +102,19 @@ public class Controller {
         else
         {
 
+        }
+    }
+
+    /**
+     * 去掉一些已经离开玩家的滑块
+     */
+    void removeThings() {
+        for(int i=0;i<things.size();++i) {
+            Thing thing = things.get(i);
+            if(thing.transPos().getY() > player.transRectangle().getY()) {
+                things.remove(i);
+                --i;
+            }
         }
     }
 
