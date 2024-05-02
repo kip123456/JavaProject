@@ -1,6 +1,6 @@
-public class Monster implements Thing {
+public class Monster extends Thing {
     int catagory,hel,atk,def,skill,posx,posy;
-    Monster(int id,int _posx,int _posy){
+    public Monster(int id,int _posx,int _posy){
         hel = DataManager.monster_data[id][0];
         atk = DataManager.monster_data[id][1];
         def = DataManager.monster_data[id][2];
