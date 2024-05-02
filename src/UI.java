@@ -24,6 +24,7 @@ public class UI {
             @Override
             public void keyTyped(KeyEvent e) {
                 controller.wasd_lock.lock();
+                controller.wasd = ' ';
                 if(controller.wasd == ' ') {
                     switch (e.getKeyChar()) {
                         case 'w':

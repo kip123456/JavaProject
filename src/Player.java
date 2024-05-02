@@ -21,9 +21,7 @@ public class Player {
         posx = 0;
         posy = 150;
         posz = 0;
-        System.out.println("Player reach here\n");
         myImage = DataManager.player_img;
-        System.out.println("player leave here\n");
     }
     public void react(T2PMessage msg) {
         health += msg.hel;
@@ -56,7 +54,7 @@ public class Player {
             ++lrSteps;
         }
         if(lrSteps >0) {
-            if(posx < Global.CHANNEL_COUNT*Global.CHANNEL_WIDTH) posx ++;
+            if(posx < (Global.CHANNEL_COUNT-1)*Global.CHANNEL_WIDTH) posx ++;
             --lrSteps;
         }
         if(udSteps <0) {
