@@ -81,8 +81,8 @@ public class Controller {
     }
 
     boolean meet(Player player, Thing thing) {
-        return Math.abs(player.transRectangle().getX() - thing.transRectangle().getX()) < 10
-            && Math.abs(player.transRectangle().getY() - thing.transRectangle().getY()) < 10;
+        return Math.abs(player.transRectangle().getX() - thing.transPos().getX()) < 10
+            && Math.abs(player.transRectangle().getY() - thing.transPos().getY()) < 10;
     }
 
     /**

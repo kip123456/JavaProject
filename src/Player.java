@@ -30,16 +30,16 @@ public class Player {
 
         if(state == Global.MovingState.STOP && direc != Global.MovingState.STOP) {
             if(direc == Global.MovingState.DOWN && posz > 0) {
-                leftSteps = 4;
+                leftSteps = Global.TICKS_PER_PLAYER_MOVE;
                 state = Global.MovingState.DOWN;
             } else if (direc == Global.MovingState.UP && posz == 0) {
-                leftSteps = 4;
+                leftSteps = Global.TICKS_PER_PLAYER_MOVE;
                 state = Global.MovingState.UP;
             } else if (direc == Global.MovingState.LEFT && posx > 0) {
-                leftSteps = 4;
+                leftSteps = Global.TICKS_PER_PLAYER_MOVE;
                 state = Global.MovingState.LEFT;
             } else if (direc == Global.MovingState.RIGHT && posx < Global.CHANNEL_WIDTH * Global.CHANNEL_COUNT) {
-                leftSteps = 4;
+                leftSteps = Global.TICKS_PER_PLAYER_MOVE;
                 state = Global.MovingState.RIGHT;
             }
         }
