@@ -135,16 +135,32 @@ public class Controller {
         wasd_lock.lock();
         switch (wasd) {
             case 'w':
-                player.move(MovingState.UP);
+                if(player.udSteps==0)
+                {
+                    player.move(MovingState.UP);
+                    wasd=' ';
+                }
                 break;
             case 's':
-                player.move(MovingState.DOWN);
+                if(player.udSteps==0)
+                {
+                    player.move(MovingState.DOWN);
+                    wasd=' ';
+                }
                 break;
             case 'a':
-                player.move(MovingState.LEFT);
+                if(player.lrSteps==0)
+                {
+                    player.move(MovingState.LEFT);
+                    wasd=' ';
+                }
                 break;
             case 'd':
-                player.move(MovingState.RIGHT);
+                if(player.lrSteps==0)
+                {
+                    player.move(MovingState.RIGHT);
+                    wasd=' ';
+                }
                 break;
             default:
                 player.move(MovingState.STOP);
