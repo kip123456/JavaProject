@@ -13,4 +13,5 @@ public class Global {
         RIGHT,
         STOP
     }
+    public static final int TICKS_PER_PLAYER_MOVE = 4;
 }
