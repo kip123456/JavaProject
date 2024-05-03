@@ -3,7 +3,10 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.xml.crypto.Data;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 public class Player {
@@ -73,10 +76,22 @@ public class Player {
         return new Rectangle(posx*25+325,posy*4+44 - posz*4,50,50);
     }
 
-    void repaint(Graphics g)
+    void repaint(Graphics g,Controller controller)
     {
         Rectangle rect = transRectangle();
-        g.drawImage(myImage, rect.x, rect.y, rect.width, rect.height, null);
+        controller.dynamic_draw(g, myImage, 0,rect.x, rect.y, rect.width, rect.height);
     }
 
+    void status_repaint(Graphics g)
+    {
+        g.drawImage(DataManager.backgroundImg[1], 0, 100,200,600, null);
+        int[] hc = new int[]{health,attack,defense,magicDefense};
+        g.setFont(g.getFont().deriveFont(30f));
+        for(int i=0;i<=3;++i)
+        {
+            g.drawImage(DataManager.icon[i], 25, 200+75*i,50,50 ,null);
+            g.setColor(Color.WHITE);
+            g.drawString(hc[i]+"", 90, 235+75*i);
+        }
+    }
 }
