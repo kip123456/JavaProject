@@ -55,25 +55,31 @@ public class Player {
         if(udSteps == 0 && posz > 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
 
         if(lrSteps <0) {
-            if(posx > 0) posx --;
+            posx--;
+            if(posx <0) posx = 0;
             ++lrSteps;
         }
         if(lrSteps >0) {
-            if(posx < (Global.CHANNEL_COUNT-1)*Global.CHANNEL_WIDTH) posx ++;
+            posx ++;
+            if(posx > Global.TICKS_PER_PLAYER_MOVE*(Global.CHANNEL_COUNT-1)) posx = (Global.CHANNEL_COUNT-1)*Global.CHANNEL_WIDTH;
             --lrSteps;
         }
         if(udSteps <0) {
-            if(posz>0) posz --;
+            posz --;
+            if(posz<0) posz = 0;
             ++udSteps;
         }
         if(udSteps >0) {
-            if(posz < Global.MAX_PLAYER_JUMP) posz ++;
+            posz ++;
+            if(posz > Global.TICKS_PER_PLAYER_MOVE) posz =0;
             --udSteps;
         }
     }
 
     Rectangle transRectangle() {//to do : change the moving speed
-        return new Rectangle(posx*25+325,posy*4+44 - posz*4,50,50);
+        return new Rectangle((int)(1.0* posx/Global.TICKS_PER_PLAYER_MOVE*100+300),
+        posy*4+44 - ((int)(1.0*posz/Global.TICKS_PER_PLAYER_MOVE*Global.MAX_PLAYER_JUMP)),
+        50,50);
     }
 
     void repaint(Graphics g,Controller controller)
