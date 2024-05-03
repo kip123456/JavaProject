@@ -69,7 +69,7 @@ public class Player {
         }
     }
 
-    Rectangle transRectangle() {
+    Rectangle transRectangle() {//to do : change the moving speed
         return new Rectangle(posx*25+325,posy*4+44 - posz*4,50,50);
     }
 

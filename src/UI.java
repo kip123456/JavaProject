@@ -3,6 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 
 
 public class UI {
@@ -82,13 +85,29 @@ class MyJPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // paintChannels(g);
-        // new Monster(1, 1, 50).repaint(g);
-        // Controller.repaint(g);
+        BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d_buffered = image.createGraphics();
+        paintChannels(g2d_buffered);
         for(Thing thing: controller.things) {
-            thing.repaint(g);
+            thing.repaint(g2d_buffered);
         }
-        controller.player.repaint(g);
+        BufferedImage perspectiveChessBoard = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
+                //to do：区域判断，只有600*600的区域进行变换
+                //to do 2: 式子推导
+                int rgb = image.getRGB(x, y);
+                double f = 800.0 / (800 + y);
+                int xv = (int) (x * f);
+                int yv = (int) (y * f);
+                if (xv >= 0 && xv < perspectiveChessBoard.getWidth() && yv >= 0 && yv < perspectiveChessBoard.getHeight()) {
+                    perspectiveChessBoard.setRGB(xv, yv, rgb);
+                }
+            }
+        }
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(perspectiveChessBoard , null, null);
+        controller.player.repaint(g2d);
     }
     MyJPanel(Controller controller) {
         super();
