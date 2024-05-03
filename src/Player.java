@@ -77,7 +77,7 @@ public class Player {
     }
 
     Rectangle transRectangle() {//to do : change the moving speed
-        return new Rectangle((int)(1.0* posx/Global.TICKS_PER_PLAYER_MOVE*100+300),
+        return new Rectangle((int)(1.0* posx/Global.TICKS_PER_PLAYER_MOVE*100+325),
         posy*4+44 - ((int)(1.0*posz/Global.TICKS_PER_PLAYER_MOVE*Global.MAX_PLAYER_JUMP)),
         50,50);
     }
