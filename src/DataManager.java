@@ -7,6 +7,8 @@ public class DataManager{
     static public int monster_num;
     static public int[][] monster_data;
     static public BufferedImage[] monster_img;
+    static public BufferedImage[] icon;
+    static public BufferedImage[] backgroundImg;
     static public BufferedImage[][] reward_img;
     static public BufferedImage player_img;
     static{
@@ -32,6 +34,26 @@ public class DataManager{
             }
         }catch(Exception e){
             System.out.println("monster img read error");
+        }
+
+        path = Path.iconImg;
+        try{
+            icon = new BufferedImage[Global.iconnum];
+            for(int i=0;i<Global.iconnum;++i){
+                icon[i] = ImageIO.read(new File(path+"/"+i+".png"));
+            }
+        }catch(Exception e){
+            System.out.println("icon img read error");
+        }
+
+        path = Path.backgroundImg;
+        try{
+            backgroundImg = new BufferedImage[Global.backgroundnum];
+            for(int i=0;i<Global.backgroundnum;++i){
+                backgroundImg[i] = ImageIO.read(new File(path+"/"+i+".png"));
+            }
+        }catch(Exception e){
+            System.out.println("background img read error");
         }
 
         path = Path.rewardImg;

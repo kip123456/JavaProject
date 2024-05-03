@@ -77,17 +77,20 @@ class MyJPanel extends JPanel {
      */
     void paintChannels(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(DataManager.backgroundImg[0],lines[0].p1.x,lines[0].p1.y,lines[Global.CHANNEL_COUNT].p1.x-lines[0].p1.x, lines[0].p2.y-lines[0].p1.y,null);
         g2d.setStroke(new BasicStroke(7));
         for (int i = 0; i < Global.CHANNEL_COUNT; i++) {
-            g2d.setColor(Color.GREEN);
-            g2d.fillRect(lines[i].p1.x, lines[i].p1.y, lines[i+1].p1.x-lines[i].p1.x, lines[i].p2.y-lines[i].p1.y);
+        //     int mid = (lines[i].p2.y+lines[i].p1.y)/2;
+        //     g2d.drawImage(DataManager.backgroundImg[0],lines[i].p1.x, lines[i].p1.y, lines[i+1].p1.x-lines[i].p1.x, mid-lines[i].p1.y,null);
+        //     g2d.drawImage(DataManager.backgroundImg[0],lines[i].p1.x, mid, lines[i+1].p1.x-lines[i].p1.x, lines[i].p2.y-mid,null);
             g2d.setColor(Color.BLACK);
             g2d.drawRect(lines[i].p1.x, lines[i].p1.y, lines[i+1].p1.x-lines[i].p1.x, lines[i].p2.y-lines[i].p1.y);
-            System.out.println(lines[i].p1.x + " " + lines[i].p1.y + " " + (lines[i+1].p1.x - lines[i].p1.x) + " " + (lines[i].p2.y-lines[i].p1.y));
+            // System.out.println(lines[i].p1.x + " " + lines[i].p1.y + " " + (lines[i+1].p1.x - lines[i].p1.x) + " " + (lines[i].p2.y-lines[i].p1.y));
         }
     }
     @Override
     public void paintComponent(Graphics g) {
+        
         super.paintComponent(g);
         BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d_buffered = image.createGraphics();
@@ -114,7 +117,7 @@ class MyJPanel extends JPanel {
                  */
                 y -= 44;
                 x -= 300;
-                int px = 150;
+                int px = 160;
                 int py = -50;
 
                 // 用于改变上边的位置，ny越大，上边越低
@@ -146,8 +149,11 @@ class MyJPanel extends JPanel {
             }
         }
         Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(DataManager.backgroundImg[4],200,100,600,144, null);
+        controller.dynamic_draw(g,DataManager.backgroundImg[5],0,400,100,144,144);
         g2d.drawImage(perspectiveChessBoard , null, null);
-        controller.player.repaint(g2d);
+        controller.player.repaint(g2d,controller);
+        controller.player.status_repaint(g2d);
     }
     MyJPanel(Controller controller) {
         super();

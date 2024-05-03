@@ -1,5 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
@@ -149,7 +150,9 @@ public class Controller {
     boolean meet(Player player, Thing thing) {
         if((player.udSteps != 0 || player.posz > 0 )&& thing.haveHeight==false)
             return false;
-        return player.transRectangle().intersects(thing.transPos());
+        Rectangle rec = thing.transPos();
+        rec.height -= 20;
+        return player.transRectangle().intersects(rec);
     }
 
     /**
@@ -193,6 +196,16 @@ public class Controller {
     }
 
 
+    /*
+     * 画行走图img的第id行，画到左上角在(x,y)
+     */
+    public void dynamic_draw(Graphics g,BufferedImage img,int id,int x,int y,int width,int height)
+    {
+        int rol = (ticks_already/10)%4;
+        int imgwidth = img.getWidth()/4;
+        int imgheight = img.getHeight()/4;
+        g.drawImage(img,x,y,x+width,y+height,rol*imgwidth,id*imgheight,rol*imgwidth+imgwidth,id*imgheight+imgheight, null);
+    }
     /**
      * 重绘ui
      */
