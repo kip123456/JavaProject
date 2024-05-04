@@ -3,6 +3,9 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import javax.sound.sampled.Clip;
+
 import java.util.concurrent.locks.Condition;
 import java.util.*;
 
@@ -46,6 +49,8 @@ public class Controller {
     
 
     void work() {
+        DataManager.bgm[1].start();
+        DataManager.bgm[1].loop(Clip.LOOP_CONTINUOUSLY);        
         while(gameover == 0) {
             moveThing();
             removeThings();

@@ -2,6 +2,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class DataManager{
     static public int monster_num;
@@ -11,6 +14,8 @@ public class DataManager{
     static public BufferedImage[] backgroundImg;
     static public BufferedImage[][] reward_img;
     static public BufferedImage player_img;
+    static public Clip[] bgm;
+
     static{
         String path = Path.monsterData;
         
@@ -54,6 +59,18 @@ public class DataManager{
             }
         }catch(Exception e){
             System.out.println("background img read error");
+        }
+
+        path = Path.bgm;
+        try{
+            bgm = new Clip[Global.bgmnum];
+            for(int i=0;i<Global.bgmnum;++i){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(new File(path+"/"+i+".wav"));
+                bgm[i] = AudioSystem.getClip();
+                bgm[i].open(audioInput);
+            }
+        }catch(Exception e){
+            System.out.println("bgm load error");
         }
 
         path = Path.rewardImg;
