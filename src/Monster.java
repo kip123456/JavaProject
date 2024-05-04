@@ -16,7 +16,7 @@ public class Monster extends Thing {
         int turns = hel / (p.attack - def);
         if(hel % (p.attack - def) != 0)
             ++ turns;
-        int damage = (turns - 1) * (atk - p.defense) - p.magicDefense;
+        int damage = Math.max(0,(turns - 1) * (atk - p.defense) - p.magicDefense);
         return new T2PMessage(damage);
     }
 }

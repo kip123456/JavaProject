@@ -7,6 +7,7 @@ public class Rewards extends Thing{
         super.posx = posx;
         super.posy = posy;
         myImage = DataManager.reward_img[catagory][number];
+        ++number;
         if(catagory == 0){
             hel = number*50;
         }

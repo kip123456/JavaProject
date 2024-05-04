@@ -88,27 +88,37 @@ class MyJPanel extends JPanel {
             // System.out.println(lines[i].p1.x + " " + lines[i].p1.y + " " + (lines[i+1].p1.x - lines[i].p1.x) + " " + (lines[i].p2.y-lines[i].p1.y));
         }
     }
+    void road_repaint(Graphics g){
+        Graphics2D g2d = (Graphics2D) g;
+        //设置透明度为0.5
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
+        final int x = 302, y = 664, width = 400, height = 33;
+        g2d.drawImage(DataManager.backgroundImg[6], x, y,width,height, null);
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+    }
     @Override
     public void paintComponent(Graphics g) {
         
         super.paintComponent(g);
-        BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        //x多出900，填满空白区域
+        BufferedImage image = new BufferedImage(this.getWidth()+900, this.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d_buffered = image.createGraphics();
+        g2d_buffered.drawImage(DataManager.backgroundImg[3], 0,0,image.getWidth(),image.getHeight(),null);
         paintChannels(g2d_buffered);
+        road_repaint(g2d_buffered);
         for(Thing thing: controller.things) {
             thing.repaint(g2d_buffered);
         }
-        BufferedImage perspectiveChessBoard = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        BufferedImage perspectiveChessBoard = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
         for (int j = 0; j < image.getHeight(); j++) {
             for (int i = 0; i < image.getWidth(); i++) {
-                //to do：区域判断，只有600*600的区域进行变换
-                //to do 2: 式子推导
 
                 int x = i;
                 int y = j;
-
+                // 将+600~+900多出部分拼接到-300~0，实现负坐标透视
+                if(x>=this.getWidth()+600)x-=image.getWidth();
                 // 区域判断
-                if(x <= 295 || y <= 40) {
+                if( y < 40||y>700) {
                     continue;
                 }
 

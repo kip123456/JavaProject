@@ -7,6 +7,6 @@ public class T2PMessage {
         mdef = _mdef;
     }
     T2PMessage(int _hel){
-        this(_hel,0,0,0);
+        this(_hel==-1?-0x3f3f3f3f:-_hel,0,0,0);
     }
 }

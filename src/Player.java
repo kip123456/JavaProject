@@ -76,15 +76,16 @@ public class Player {
         }
     }
 
-    Rectangle transRectangle() {//to do : change the moving speed
+    //将posz计算分离至repaint，否则对空中怪物meet计算会出错
+    Rectangle transRectangle() {
         return new Rectangle((int)(1.0* posx/Global.TICKS_PER_PLAYER_MOVE*100+325),
-        posy*4+44 - ((int)(1.0*posz/Global.TICKS_PER_PLAYER_MOVE*Global.MAX_PLAYER_JUMP)),
-        50,50);
+        posy*4+44, 50,50);
     }
-
+    //posz参数修正改为二次函数
     void repaint(Graphics g,Controller controller)
     {
         Rectangle rect = transRectangle();
+        rect.translate(0, - ((int)(1.0*posz/Global.TICKS_PER_PLAYER_MOVE*Global.MAX_PLAYER_JUMP))-posz*posz*2);
         controller.dynamic_draw(g, myImage, 0,rect.x, rect.y, rect.width, rect.height);
     }
 
