@@ -24,6 +24,7 @@ public class ThingManual extends JPanel {
     }
     private static class OneThing extends JPanel {
         public OneThing(Dimension  preferredSize, ThingManualInfo info) {
+
             Image img = info.img;
             String[] name_and = info.name_and;
             int health = info.health;
@@ -31,18 +32,21 @@ public class ThingManual extends JPanel {
             int defence = info.defence;
             int coins = info.coins;
             int experience = info.experience;
+            setBackground(new Color(0,0,0,255));
             setLayout(null);
-            Font font = new Font("Arial", Font.PLAIN, 20);
+            setBackground(new Color(0,0,0,255));
+            Font font = new Font("Arial", Font.PLAIN, 15);
             setPreferredSize(preferredSize);
-            setBorder(BorderFactory.createDashedBorder(Color.BLACK, 3.0f, 3.0f, 3.0f, true));
+            setBorder(BorderFactory.createDashedBorder(Color.WHITE, 3.0f, 3.0f, 3.0f, true));
 
             JLabel label;
             label = new JLabel();
             label.setBounds(0, 0, preferredSize.width/7, preferredSize.height);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setForeground(Color.BLACK);
+            label.setForeground(Color.WHITE);
             if(img != null) {
                 label.setIcon(new ImageIcon(img));
             } else {
@@ -57,82 +61,93 @@ public class ThingManual extends JPanel {
                 label = new JLabel(name_and[i]);
                 label.setBounds(preferredSize.width/7*1,  preferredSize.height/3*i, preferredSize.width/7, preferredSize.height/3);
                 label.setFont(font);
-                label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+                label.setBackground(new Color(0,0,0,255));
+                label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
                 label.setHorizontalAlignment(SwingConstants.CENTER);
-                label.setForeground(Color.BLACK);
+                label.setForeground(Color.WHITE);
                 add(label);
             }
             label = new JLabel("Health:");
             label.setBounds(preferredSize.width/7*2,  0,  preferredSize.width/7, preferredSize.height/3);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
             label.setForeground(Color.green);
             add(label);
             label= new JLabel(String.valueOf(health));
             label.setBounds(preferredSize.width/7*2,  preferredSize.height/3, preferredSize.width/7, preferredSize.height/3);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setForeground(Color.BLACK);
+            label.setForeground(Color.WHITE);
             add(label);
             label = new JLabel("Attack:");
             label.setBounds(preferredSize.width/7*3, 0,  preferredSize.width/7, preferredSize.height/3);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
             label.setForeground(Color.red);
             add(label);
             label= new JLabel(String.valueOf(attack));
             label.setBounds(preferredSize.width/7*3,  preferredSize.height/3, preferredSize.width/7, preferredSize.height/3);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setForeground(Color.BLACK);
+            label.setForeground(Color.WHITE);
             add(label);
             label= new JLabel("Defence:");
             label.setBounds(preferredSize.width/7*4, 0,  preferredSize.width/7, preferredSize.height/3);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
             label.setForeground(Color.blue);
             add(label);
             label= new JLabel(String.valueOf(defence));
             label.setBounds(preferredSize.width/7*4,  preferredSize.height/3, preferredSize.width/7, preferredSize.height/3);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setForeground(Color.black);
+            label.setForeground(Color.WHITE);
             add(label);
 
             label= new JLabel("Coins:");
             label.setBounds(preferredSize.width/7*5, 0,  preferredSize.width/7, preferredSize.height/3);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
             label.setForeground(Color.YELLOW);
             add(label);
             label= new JLabel(String.valueOf(coins));
             label.setBounds(preferredSize.width/7*5,  preferredSize.height/3, preferredSize.width/7, preferredSize.height/3);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setForeground(Color.black);
+            label.setForeground(Color.WHITE);
             add(label);
 
             label= new JLabel("Experiece:");
             label.setBounds(preferredSize.width/7*6, 0,  preferredSize.width/7, preferredSize.height/3);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
             label.setForeground(Color.GREEN);
             add(label);
-            label= new JLabel(String.valueOf(coins));
+            label= new JLabel(String.valueOf(experience));
             label.setBounds(preferredSize.width/7*6,  preferredSize.height/3, preferredSize.width/7, preferredSize.height/3);
             label.setFont(font);
-            label.setBorder(BorderFactory.createDashedBorder(Color.BLACK, 1.0f, 1.0f, 1.0f, true));
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
             label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setForeground(Color.black);
+            label.setForeground(Color.WHITE);
             add(label);
         }
 
@@ -173,16 +188,21 @@ public class ThingManual extends JPanel {
     }
 
     ThingManual(int x,int y) {
+
+        setBackground(Color.BLACK);
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(x, y));
         panel = new JPanel();
+        panel.setBackground(new Color(0,0,0,255));
         panel.setLayout(new FlowLayout());
         panel.setPreferredSize(new Dimension(x/8*6, y/8*6));
         scrollPane = new JScrollPane(panel);
+        scrollPane.setBackground(new Color(0,0,0,255));
         scrollPane.setPreferredSize(new Dimension(x/8*6, y/8*6));
         add(scrollPane, BorderLayout.CENTER);
 
         JLabel label = new JLabel();
+        label.setForeground(Color.WHITE);
         label.setText("Monster Manual");
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
