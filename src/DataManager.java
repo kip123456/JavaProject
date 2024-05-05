@@ -24,9 +24,9 @@ public class DataManager{
         
         try(Scanner reader = new Scanner(new File(path),"UTF-8")){
             monster_num = reader.nextInt();
-            monster_data = new int[monster_num][4];
+            monster_data = new int[monster_num][6];
             for (int i = 0;i < monster_num;++i){
-                for (int j = 0; j < 4; ++ j){
+                for (int j = 0; j < 6; ++ j){
                     monster_data[i][j] = reader.nextInt();
                 }
             }

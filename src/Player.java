@@ -10,11 +10,14 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 public class Player {
-    int health, defense, attack, magicDefense;
+    int health, defense, attack, magicDefense,money,exp;
     int posx, posy, posz;
     int lrSteps;
     int udSteps;
     int inhurt;
+    int skill_loader;//技能条，10000为满
+    int skill_damage_rate;//技能伤害比率，初始为10倍攻击
+    int skill_load_speed;//技能恢复速度
     BufferedImage[] imgs;
     public Player() {
         health = 10000;
@@ -26,6 +29,9 @@ public class Player {
         posy = 150;
         posz = 0;
         imgs = DataManager.player_imgs;
+        skill_damage_rate = 10;
+        skill_loader = 0;
+        skill_load_speed = Global.skill_load_speed;
     }
     public void react(T2PMessage msg) {
         if(msg.hel < 0)
@@ -36,6 +42,8 @@ public class Player {
         attack += msg.atk;
         defense += msg.def;
         magicDefense += msg.mdef;
+        money += msg.money;
+        exp += msg.exp;
     }
     public void setMove(MovingState direc)
     {
@@ -58,6 +66,7 @@ public class Player {
     }
     public void move() {
         if(inhurt > 0) --inhurt;
+        skill_loader += skill_load_speed;
         if(udSteps == 0 && posz > 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
 
         if(lrSteps <0) {
@@ -98,9 +107,9 @@ public class Player {
     void status_repaint(Graphics g)
     {
         g.drawImage(DataManager.backgroundImg[1], 0, 100,200,600, null);
-        int[] hc = new int[]{health,attack,defense,magicDefense};
+        int[] hc = new int[]{health,attack,defense,magicDefense,exp,money};
         g.setFont(g.getFont().deriveFont(30f));
-        for(int i=0;i<=3;++i)
+        for(int i=0;i<=5;++i)
         {
             g.drawImage(DataManager.icon[i], 25, 200+75*i,50,50 ,null);
             g.setColor(Color.WHITE);

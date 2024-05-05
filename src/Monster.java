@@ -1,22 +1,24 @@
 public class Monster extends Thing {
-    int catagory,hel,atk,def,skill;
+    int catagory,hel,atk,def,skill,money,exp;
     public Monster(int id,int _posx,int _posy){
         hel = DataManager.monster_data[id][0];
         atk = DataManager.monster_data[id][1];
         def = DataManager.monster_data[id][2];
-        skill = DataManager.monster_data[id][3];
+        money = DataManager.monster_data[id][3];
+        exp = DataManager.monster_data[id][4];
+        skill = DataManager.monster_data[id][5];
         myImage = DataManager.monster_img[id];
         posx=_posx;
         posy=_posy;
     }
     public T2PMessage interact(Player p)
     {
-        if(p.attack<=def)return new T2PMessage(-1);
-        if(atk<=p.defense)return new T2PMessage(0);
+        if(p.attack<=def)return new T2PMessage(-1,0,0);
+        if(atk<=p.defense)return new T2PMessage(0,money,exp);
         int turns = hel / (p.attack - def);
         if(hel % (p.attack - def) != 0)
             ++ turns;
         int damage = Math.max(0,(turns - 1) * (atk - p.defense) - p.magicDefense);
-        return new T2PMessage(damage);
+        return new T2PMessage(damage,money,exp);
     }
 }
