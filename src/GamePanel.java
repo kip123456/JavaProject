@@ -67,11 +67,11 @@ public class GamePanel extends JPanel {
         controller.animationpaint(g2d_buffered,0);
         BufferedImage perspectiveChessBoard = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
         for (int j = 0; j < image.getHeight(); j++) {
-            for (int i = 0; i < image.getWidth(); i++) {
+            for (int i = 200; i < image.getWidth(); i++) {
 
                 int x = i;
                 int y = j;
-                if(x<200||x>=800)continue;
+                if(x>=800)continue;
                 // 区域判断
                 if( y < 40||y>700) {
                     continue;
@@ -123,6 +123,7 @@ public class GamePanel extends JPanel {
         controller.player.repaint(g2d,controller);
         controller.player.status_repaint(g2d);
         controller.animationpaint(g,1);
+        controller.bossHelBar(g);
     }
 
     JButton homeButton;

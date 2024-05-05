@@ -33,6 +33,7 @@ public class UI {
                 frame.remove(homePanel);
                 break;
             case GAMEING:
+                DataManager.bgm[1].stop();
                 frame.remove(gamePanel);
                 break;
             case MANUAL:

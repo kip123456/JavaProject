@@ -1,4 +1,7 @@
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.locks.Lock;
@@ -20,7 +23,7 @@ public class Controller {
      * 1 玩家胜利
      * 2 玩家失败
      */
-    int gameover = 0;
+    int gameover = 0,bossHel=1000,maxbossHel=1000;
     Lock wasd_lock = new ReentrantLock();
     char wKey = ' ' , adKey = ' ', fKey = ' ';
     Animation animation = new Animation();
@@ -41,7 +44,7 @@ public class Controller {
      * 0: 无尽模式
      * 否则: 其他模式
      */
-    int gamemode = 0;
+    int gamemode=0;
     Random rand = new Random(System.currentTimeMillis());
 
     
@@ -197,6 +200,11 @@ public class Controller {
                 --i;
             }
         }
+        if(damage > 0)
+        {
+            animation.new_animation(1,400, 100, 144, 144,5, DataManager.animationImg[3],1);    
+            bossHel -= damage;
+        }
     }
     void useSkill(int skillChannel){
         Rectangle rec = player.transRectangle();
@@ -277,21 +285,13 @@ public class Controller {
      * 判断游戏是否结束（或者之类的？）
      */
     void judge() {
-        int all_ticks = 10;
-        switch (gamemode) {
-            case 0:
-                all_ticks = ticks_already + 1000;
-                break;
-            default:
-                all_ticks = 100000;
-                break;
-        }
+        if(gamemode == 0)return;
 
         if(player.health <=0) {
             System.out.println("Game Over!");
             gameover = 2;
         }
-        else if(ticks_already >= all_ticks) {
+        else if(bossHel <= 0) {
             System.out.println("Game Over!");
             gameover = 1;
         }
@@ -317,5 +317,15 @@ public class Controller {
     void animationpaint(Graphics g,int mode)
     {
         animation.paint(g,mode);
+    }
+    void bossHelBar(Graphics g)
+    {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        g.setColor(Color.black);
+        g.drawRect(270, 120,404,15);
+        g.setColor(Color.red);
+        g.fillRect(270, 120,(int)(1.0*bossHel/maxbossHel*404),15);
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 }
