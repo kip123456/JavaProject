@@ -9,7 +9,7 @@ import java.util.*;
 
 
 public class Controller {
-
+    UIMode lastMode = UIMode.HOME;
     UIMode uiMode = UIMode.HOME;
     Lock ui_lock = new ReentrantLock();
 
@@ -59,8 +59,17 @@ public class Controller {
     }
     void setUIMode(UIMode mode) {
         ui_lock.lock();
+        if(uiMode != mode)
+            lastMode = uiMode;
         uiMode = mode;
         ui_lock.unlock();
+    }
+
+    UIMode getLastUiMode() {
+        ui_lock.lock();
+        UIMode mode = lastMode;
+        ui_lock.unlock();
+        return mode;
     }
     
     void work() {

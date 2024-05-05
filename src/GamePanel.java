@@ -139,8 +139,8 @@ public class GamePanel extends JPanel {
         homeButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(homeButton);
         setBackground(Color.WHITE);
-
-
+        
+        
 
         for(int i = 0; i <= Global.CHANNEL_COUNT; i++) {
             lines[i] = new Line(

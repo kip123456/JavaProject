@@ -105,10 +105,20 @@ public class UI {
                 }
                 controller.wasd_lock.unlock();
                 if(e.getKeyChar() == 'x') {
-                    controller.setUIMode(UIMode.MANUAL);
-                }
+                    controller.ui_lock.lock();
+                    if(controller.uiMode == UIMode.MANUAL) {
+                        controller.uiMode = controller.lastMode;
+                        controller.lastMode = UIMode.MANUAL;
+                    } else {
+                        controller.lastMode = controller.uiMode;
+                        controller.uiMode = UIMode.MANUAL;
+                    }
+                    controller.ui_lock.unlock();
+                } 
             }
         });
+        frame.setFocusable(true);
+        frame.requestFocusInWindow();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
