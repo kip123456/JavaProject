@@ -33,7 +33,7 @@ public class Player {
         imgs = DataManager.player_imgs;
         skill_damage_rate = 10;
         skill_loader = 0;
-        skill_load_speed = Global.skill_load_speed*10;
+        skill_load_speed = Global.skill_load_speed*4;
         //ps：测试模式，血量和技能恢复速度增加
     }
     public void react(T2PMessage msg) {
@@ -67,10 +67,21 @@ public class Player {
                 break;
         }
     }
-    public void move() {
+    void skillLoad(SEController se)
+    {
+        if(skill_loader < skill_store)
+        {
+            skill_loader += skill_load_speed;
+            if(skill_loader >= skill_store)
+            {
+                skill_loader = skill_store;
+                se.add(DataManager.se[3]);
+            }
+        }
+    }
+    public void move(SEController se) {
         if(inhurt > 0) --inhurt;
-        skill_loader += skill_load_speed;
-        skill_loader = Math.min(skill_loader,skill_store);
+        skillLoad(se);
         if(udSteps == 0 && posz > 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
 
         if(lrSteps <0) {
@@ -119,6 +130,12 @@ public class Player {
             g.setColor(Color.WHITE);
             g.drawString(hc[i]+"", 90, 235+75*i);
         }
+        g.setColor(Color.black);
+        g.drawRect(25, 330, 100, 10);
+        g.setColor(Color.yellow);
+        g.fillRect(26, 331, (skill_loader%10001)/102, 8);
+        g.setFont(g.getFont().deriveFont(12f));
+        g.drawString(skill_loader/10000+" / "+skill_store/10000, 130, 334);
     }
     int useSkill()
     {

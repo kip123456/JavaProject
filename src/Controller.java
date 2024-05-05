@@ -181,6 +181,7 @@ public class Controller {
                 {
                     break;
                 }
+                player.react(((Monster)x).died());
                 things.remove(x);
                 --i;
             }
@@ -212,7 +213,7 @@ public class Controller {
         if(fKey == 'f'){
             skillChannel = player.useSkill();
         }
-        player.move();
+        player.move(seController);
         wKey = adKey = fKey = ' ';
         wasd_lock.unlock();
         if(skillChannel!=-1)

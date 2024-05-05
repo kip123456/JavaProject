@@ -23,6 +23,10 @@ public class Monster extends Thing {
         int damage = Math.max(0,(turns - 1) * (atk - p.defense) - p.magicDefense);
         return new T2PMessage(damage,money,exp);
     }
+    public T2PMessage died()
+    {
+        return new T2PMessage(0,money,exp);
+    }
     int getDamage(int damage,Animation animation)
     {
         Rectangle rec = transPos();
