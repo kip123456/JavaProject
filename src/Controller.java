@@ -5,13 +5,13 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.sound.sampled.Clip;
-import javax.xml.crypto.Data;
-
-import java.util.concurrent.locks.Condition;
 import java.util.*;
 
 
 public class Controller {
+
+    UIMode uiMode = UIMode.HOME;
+    Lock ui_lock = new ReentrantLock();
 
     UI ui;
 
@@ -50,12 +50,39 @@ public class Controller {
         super();
         ui = new UI(this);
     }
-    
 
+    UIMode getUIMode() {
+        ui_lock.lock();
+        UIMode mode = uiMode;
+        ui_lock.unlock();
+        return mode;
+    }
+    void setUIMode(UIMode mode) {
+        ui_lock.lock();
+        uiMode = mode;
+        ui_lock.unlock();
+    }
+    
     void work() {
+        while(true) {
+            UIMode mode = getUIMode();
+            ui.setMode(mode);
+            switch(mode) {
+                case HOME:
+                    break;
+                case GAMEING:
+                    gamework();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    void gamework() {
         DataManager.bgm[1].start();
         DataManager.bgm[1].loop(Clip.LOOP_CONTINUOUSLY);        
-        while(gameover == 0) {
+        while(gameover == 0 && getUIMode() == UIMode.GAMEING) {
             moveThing();
             removeThings();
             generateThings();
