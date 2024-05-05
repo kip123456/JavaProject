@@ -5,7 +5,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import java.awt.*;
 
 
-public class ThingManual extends JPanel {
+public class ThingManualPanel extends JPanel {
     public static class ThingManualInfo {
         public Image img;
         public String[] name_and;
@@ -187,7 +187,7 @@ public class ThingManual extends JPanel {
         );
     }
 
-    ThingManual(int x,int y) {
+    ThingManualPanel(int x,int y) {
 
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
@@ -211,7 +211,7 @@ public class ThingManual extends JPanel {
         add(label, BorderLayout.NORTH);
     }
 
-    ThingManual() {
+    ThingManualPanel() {
         this(600, 600);
     }
 
@@ -224,7 +224,7 @@ public class ThingManual extends JPanel {
         nothing[0] = "Nothing";
         nothing[1] = "Nothing";
         nothing[2] = "Nothing";
-        ThingManual t = new ThingManual();
+        ThingManualPanel t = new ThingManualPanel();
         t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
         t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
         t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
