@@ -4,8 +4,8 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
+import java.util.Date;
+
 
 
 public class UI {
@@ -141,6 +141,8 @@ class MyJPanel extends JPanel {
 
                 // 线性函数
                 // y = ny + (int)(1.0*y/660*(660-ny));
+
+
                 y = ny + (int)(Math.pow(tmp, 1.4)*(660-ny));
 
 
