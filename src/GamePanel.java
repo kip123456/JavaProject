@@ -2,6 +2,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.image.*;
+import java.awt.event.*;
 
 
 public class GamePanel extends JPanel {
@@ -138,6 +139,9 @@ public class GamePanel extends JPanel {
         homeButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(homeButton);
         setBackground(Color.WHITE);
+
+
+
         for(int i = 0; i <= Global.CHANNEL_COUNT; i++) {
             lines[i] = new Line(
                 new Point(300+i*100, 44),

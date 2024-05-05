@@ -73,6 +73,8 @@ public class Controller {
                 case GAMEING:
                     gamework();
                     break;
+                case MANUAL:
+                    break;
                 default:
                     break;
             }

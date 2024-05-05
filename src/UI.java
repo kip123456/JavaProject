@@ -8,6 +8,7 @@ public class UI {
     JFrame frame;
     GamePanel gamePanel;
     HomePanel homePanel;
+    ThingManualPanel thingManualPanel;
     Controller controller;
     UIMode mode = UIMode.HOME;
 
@@ -19,6 +20,8 @@ public class UI {
             case GAMEING:
                 frame.add(gamePanel);
                 break;
+            case MANUAL:
+                frame.add(thingManualPanel);
             default:
                 break;
         }
@@ -32,6 +35,8 @@ public class UI {
             case GAMEING:
                 frame.remove(gamePanel);
                 break;
+            case MANUAL:
+                frame.remove(thingManualPanel);
             default:
                 break;
         }
@@ -51,11 +56,28 @@ public class UI {
         gamePanel.repaint();
     }
 
+    void loadThings2ManualPanel() {
+        int num = DataManager.monster_num;
+        for (int i = 0; i < num; i++) {
+            String[] name_and = new String[3];
+            name_and[0] = String.valueOf(i*3);
+            name_and[1] = String.valueOf(i*3+1);
+            name_and[2] = String.valueOf(i*3+2);
+            ThingManualPanel.ThingManualInfo info = new ThingManualPanel.ThingManualInfo
+                (DataManager.monster_img[i], name_and, 0, 0, 0, 0, 0);
+            thingManualPanel.insAManual(info);
+        }
+    }
+
     UI(Controller controller) {
         this.controller = controller;
         frame = new JFrame("JAVA Project");
         gamePanel = new GamePanel(controller);
         homePanel = new HomePanel(controller);
+        thingManualPanel = new ThingManualPanel(800,800);
+        loadThings2ManualPanel();
+
+
         frame.add(homePanel);
 
         frame.setSize(Global.WINDOW_WIDTH, Global.WINDOW_WIDTH);
@@ -82,6 +104,9 @@ public class UI {
                         break;
                 }
                 controller.wasd_lock.unlock();
+                if(e.getKeyChar() == 'x') {
+                    controller.setUIMode(UIMode.MANUAL);
+                }
             }
         });
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
