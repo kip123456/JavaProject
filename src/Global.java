@@ -9,7 +9,7 @@ public class Global {
     public static final int TICKS_PER_PLAYER_MOVE = 4;
     public static final int MAX_PLAYER_JUMP = 10;
     public static final int iconnum = 6;
-    public static final int backgroundnum = 7;
+    public static final int backgroundnum = 8;
     public static final int animationnum = 4;
     public static final int bgmnum = 5;
     public static final int senum = 4;
