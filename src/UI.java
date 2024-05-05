@@ -42,6 +42,9 @@ public class UI {
                     case 'd':
                         controller.adKey = 'd';
                         break;
+                    case 'f':
+                        controller.fKey = 'f';
+                        break;
                     default:
                         break;
                 }
@@ -124,6 +127,7 @@ class GamePanel extends JPanel {
         for(Thing thing: controller.things) {
             thing.repaint(g2d_buffered);
         }
+        controller.animationpaint(g2d_buffered,0);
         BufferedImage perspectiveChessBoard = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
         for (int j = 0; j < image.getHeight(); j++) {
             for (int i = 0; i < image.getWidth(); i++) {
@@ -181,7 +185,7 @@ class GamePanel extends JPanel {
         g2d.drawImage(perspectiveChessBoard , null, null);
         controller.player.repaint(g2d,controller);
         controller.player.status_repaint(g2d);
-        controller.animationpaint(g);
+        controller.animationpaint(g,1);
     }
     GamePanel(Controller controller) {
         super();

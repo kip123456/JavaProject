@@ -22,7 +22,7 @@ public class Controller {
      */
     int gameover = 0;
     Lock wasd_lock = new ReentrantLock();
-    char wKey = ' ' , adKey = ' ';
+    char wKey = ' ' , adKey = ' ', fKey = ' ';
     Animation animation = new Animation();
     SEController seController = new SEController();
     
@@ -136,11 +136,42 @@ public class Controller {
         }
     }
 
-
+    /*
+     * 技能释放
+     */
+    int damage_delay,channelbuffer;
+    void damageCaculate()
+    {
+        int damage = player.attack*player.skill_damage_rate;
+        for(int i=0;i<things.size();++i)
+        {
+            Thing x = things.get(i);
+            if(x.posx != channelbuffer)continue;
+            if(x instanceof Monster)
+            {
+                damage = ((Monster)x).getDamage(damage,animation);
+                if(damage == -1)
+                {
+                    break;
+                }
+                things.remove(x);
+                --i;
+            }
+        }
+    }
+    void useSkill(int skillChannel){
+        Rectangle rec = player.transRectangle();
+        animation.new_animation(1, rec.x-50,rec.y-75,150,150,7,DataManager.animationImg[1],1);
+        animation.new_animation(2, rec.x-15,70, 80, 580, 4, DataManager.animationImg[2],0);
+        seController.add(DataManager.se[2]);
+        channelbuffer = skillChannel;
+        damage_delay = 12;
+    }
     /**
-     * 角色移动
+     * 角色移动&技能
      */
     void moveCharacter() {
+        int skillChannel=-1;
         wasd_lock.lock();
         if (wKey == 'w') {
             player.setMove(MovingState.UP);
@@ -151,9 +182,22 @@ public class Controller {
         if(adKey == 'd'){
             player.setMove(MovingState.RIGHT);
         }
+        if(fKey == 'f'){
+            skillChannel = player.useSkill();
+        }
         player.move();
-        wKey = adKey = ' ';
+        wKey = adKey = fKey = ' ';
         wasd_lock.unlock();
+        if(skillChannel!=-1)
+        {
+            useSkill(skillChannel);
+        }
+        if(damage_delay>0)
+        {
+            --damage_delay;
+            if(damage_delay == 0)
+            damageCaculate();
+        }
     }
 
     boolean meet(Player player, Thing thing) {
@@ -175,8 +219,12 @@ public class Controller {
                 if(thing instanceof Monster)
                 {
                     Rectangle rec = player.transRectangle();
-                    animation.new_animation(1, rec.x, rec.y, rec.width, rec.height,3, DataManager.animationImg[0]);    
+                    animation.new_animation(1, rec.x, rec.y, rec.width, rec.height,3, DataManager.animationImg[0],1);    
                     seController.add(DataManager.se[0]);
+                }
+                else
+                {
+                    seController.add(DataManager.se[1]);
                 }
                 player.react(thing.interact(player));
                 things.remove(i);
@@ -227,8 +275,8 @@ public class Controller {
     void repaint() {
         ui.repaint();
     }
-    void animationpaint(Graphics g)
+    void animationpaint(Graphics g,int mode)
     {
-        animation.paint(g);
+        animation.paint(g,mode);
     }
 }

@@ -15,9 +15,10 @@ public class Player {
     int lrSteps;
     int udSteps;
     int inhurt;
-    int skill_loader;//技能条，10000为满
+    int skill_loader;//技能条，10000为一次技能
     int skill_damage_rate;//技能伤害比率，初始为10倍攻击
     int skill_load_speed;//技能恢复速度
+    int skill_store;//能存储多少技能蓄力
     BufferedImage[] imgs;
     public Player() {
         health = 10000;
@@ -28,10 +29,12 @@ public class Player {
         posx = 0;
         posy = 150;
         posz = 0;
+        skill_store = 10000;
         imgs = DataManager.player_imgs;
         skill_damage_rate = 10;
         skill_loader = 0;
-        skill_load_speed = Global.skill_load_speed;
+        skill_load_speed = Global.skill_load_speed*10;
+        //ps：测试模式，血量和技能恢复速度增加
     }
     public void react(T2PMessage msg) {
         if(msg.hel < 0)
@@ -67,6 +70,7 @@ public class Player {
     public void move() {
         if(inhurt > 0) --inhurt;
         skill_loader += skill_load_speed;
+        skill_loader = Math.min(skill_loader,skill_store);
         if(udSteps == 0 && posz > 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
 
         if(lrSteps <0) {
@@ -115,5 +119,14 @@ public class Player {
             g.setColor(Color.WHITE);
             g.drawString(hc[i]+"", 90, 235+75*i);
         }
+    }
+    int useSkill()
+    {
+        if(skill_loader>=10000&&lrSteps<=1&&udSteps<=1)
+        {
+            skill_loader-=10000;
+            return (posx+lrSteps)/Global.TICKS_PER_PLAYER_MOVE;
+        }
+        return -1;
     }
 }
