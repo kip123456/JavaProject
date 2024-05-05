@@ -12,9 +12,12 @@ public class DataManager{
     static public BufferedImage[] monster_img;
     static public BufferedImage[] icon;
     static public BufferedImage[] backgroundImg;
+    static public BufferedImage[] animationImg;
     static public BufferedImage[][] reward_img;
     static public BufferedImage player_img;
+    static public BufferedImage[] player_imgs;
     static public Clip[] bgm;
+    static public File[] se;
 
     static{
         String path = Path.monsterData;
@@ -61,6 +64,16 @@ public class DataManager{
             System.out.println("background img read error");
         }
 
+        path = Path.animationImg;
+        try{
+            animationImg = new BufferedImage[Global.animationnum];
+            for(int i=0;i<Global.animationnum;++i){
+                animationImg[i] = ImageIO.read(new File(path+"/"+i+".png"));
+            }
+        }catch(Exception e){
+            System.out.println("animation img read error");
+        }
+
         path = Path.bgm;
         try{
             bgm = new Clip[Global.bgmnum];
@@ -68,6 +81,16 @@ public class DataManager{
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(new File(path+"/"+i+".wav"));
                 bgm[i] = AudioSystem.getClip();
                 bgm[i].open(audioInput);
+            }
+        }catch(Exception e){
+            System.out.println("bgm load error");
+        }
+
+        path = Path.se;
+        try{
+            se = new File[Global.senum];
+            for(int i=0;i<Global.senum;++i){
+                se[i] = new File(path+"/"+i+".wav");
             }
         }catch(Exception e){
             System.out.println("bgm load error");
@@ -90,6 +113,11 @@ public class DataManager{
         path = Path.playerImg;
         try{
             player_img = ImageIO.read(new File(path));
+            player_imgs = new BufferedImage[4];
+            player_imgs[3] = ImageIO.read(new File("./data/img/Player2.png"));
+            player_imgs[2] = ImageIO.read(new File("./data/img/Player3.png"));
+            player_imgs[1] = ImageIO.read(new File("./data/img/Player2.png"));
+            player_imgs[0] = ImageIO.read(new File("./data/img/Player.png"));
         }catch(Exception e){
             System.out.println("player img read error");
         }

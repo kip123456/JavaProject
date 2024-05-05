@@ -164,6 +164,7 @@ class MyJPanel extends JPanel {
         g2d.drawImage(perspectiveChessBoard , null, null);
         controller.player.repaint(g2d,controller);
         controller.player.status_repaint(g2d);
+        controller.animationpaint(g);
     }
     MyJPanel(Controller controller) {
         super();

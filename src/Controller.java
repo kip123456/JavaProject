@@ -5,6 +5,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.sound.sampled.Clip;
+import javax.xml.crypto.Data;
 
 import java.util.concurrent.locks.Condition;
 import java.util.*;
@@ -22,6 +23,9 @@ public class Controller {
     int gameover = 0;
     Lock wasd_lock = new ReentrantLock();
     char wKey = ' ' , adKey = ' ';
+    Animation animation = new Animation();
+    SEController seController = new SEController();
+    
 
     /**
      * 角色
@@ -168,6 +172,12 @@ public class Controller {
             Thing thing = things.get(i);
             if(meet(player, thing)) {
                 // 角色与滑块交互
+                if(thing instanceof Monster)
+                {
+                    Rectangle rec = player.transRectangle();
+                    animation.new_animation(1, rec.x, rec.y, rec.width, rec.height,3, DataManager.animationImg[0]);    
+                    seController.add(DataManager.se[0]);
+                }
                 player.react(thing.interact(player));
                 things.remove(i);
                 --i;
@@ -216,5 +226,9 @@ public class Controller {
      */
     void repaint() {
         ui.repaint();
+    }
+    void animationpaint(Graphics g)
+    {
+        animation.paint(g);
     }
 }

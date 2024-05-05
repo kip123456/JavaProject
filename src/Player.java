@@ -14,9 +14,10 @@ public class Player {
     int posx, posy, posz;
     int lrSteps;
     int udSteps;
-    BufferedImage myImage;
+    int inhurt;
+    BufferedImage[] imgs;
     public Player() {
-        health = 100;
+        health = 10000;
         defense = 10;
         attack = 10;
         magicDefense = 10;
@@ -24,9 +25,13 @@ public class Player {
         posx = 0;
         posy = 150;
         posz = 0;
-        myImage = DataManager.player_img;
+        imgs = DataManager.player_imgs;
     }
     public void react(T2PMessage msg) {
+        if(msg.hel < 0)
+        {
+            inhurt = 3;
+        }
         health += msg.hel;
         attack += msg.atk;
         defense += msg.def;
@@ -52,6 +57,7 @@ public class Player {
         }
     }
     public void move() {
+        if(inhurt > 0) --inhurt;
         if(udSteps == 0 && posz > 0) udSteps = -Global.TICKS_PER_PLAYER_MOVE;
 
         if(lrSteps <0) {
@@ -86,7 +92,7 @@ public class Player {
     {
         Rectangle rect = transRectangle();
         rect.translate(0, - ((int)(1.0*posz/Global.TICKS_PER_PLAYER_MOVE*Global.MAX_PLAYER_JUMP))-posz*posz*2);
-        controller.dynamic_draw(g, myImage, 0,rect.x, rect.y, rect.width, rect.height);
+        controller.dynamic_draw(g, imgs[inhurt], 0,rect.x, rect.y, rect.width, rect.height);
     }
 
     void status_repaint(Graphics g)
