@@ -14,8 +14,9 @@ public class ThingManualPanel extends JPanel {
         public String[] name_and;
         public int health, attack, defence;
         public int coins, experience;
+        public int damage;
         public ThingManualInfo() {}
-        public ThingManualInfo(Image img, String[] name_and, int health, int attack, int defence, int coins, int experience) {
+        public ThingManualInfo(Image img, String[] name_and, int health, int attack, int defence, int coins, int experience, int damage) {
             this.img = img;
             this.name_and = name_and;
             this.health = health;
@@ -23,6 +24,7 @@ public class ThingManualPanel extends JPanel {
             this.defence = defence;
             this.coins = coins;
             this.experience = experience;
+            this.damage = damage;
         }
     }
     private static class OneThing extends JPanel {
@@ -35,6 +37,7 @@ public class ThingManualPanel extends JPanel {
             int defence = info.defence;
             int coins = info.coins;
             int experience = info.experience;
+            int damage = info.damage;
             setBackground(new Color(0,0,0,255));
             setLayout(null);
             setBackground(new Color(0,0,0,255));
@@ -44,7 +47,7 @@ public class ThingManualPanel extends JPanel {
 
             JLabel label;
             label = new JLabel();
-            label.setBounds(0, 0, preferredSize.width/7, preferredSize.height);
+            label.setBounds(0, 0, preferredSize.width/8, preferredSize.height);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -62,7 +65,7 @@ public class ThingManualPanel extends JPanel {
             }
             for(int i = 0;i<3 && i < name_and.length;i++) {
                 label = new JLabel(name_and[i]);
-                label.setBounds(preferredSize.width/7*1,  preferredSize.height/3*i, preferredSize.width/7, preferredSize.height/3);
+                label.setBounds(preferredSize.width/8*1,  preferredSize.height/3*i, preferredSize.width/8, preferredSize.height/3);
                 label.setFont(font);
                 label.setBackground(new Color(0,0,0,255));
                 label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -71,7 +74,7 @@ public class ThingManualPanel extends JPanel {
                 add(label);
             }
             label = new JLabel("Health:");
-            label.setBounds(preferredSize.width/7*2,  0,  preferredSize.width/7, preferredSize.height/3);
+            label.setBounds(preferredSize.width/8*2,  0,  preferredSize.width/8, preferredSize.height/3);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -79,7 +82,7 @@ public class ThingManualPanel extends JPanel {
             label.setForeground(Color.green);
             add(label);
             label= new JLabel(String.valueOf(health));
-            label.setBounds(preferredSize.width/7*2,  preferredSize.height/3, preferredSize.width/7, preferredSize.height/3);
+            label.setBounds(preferredSize.width/8*2,  preferredSize.height/3, preferredSize.width/8, preferredSize.height/3);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -87,7 +90,7 @@ public class ThingManualPanel extends JPanel {
             label.setForeground(Color.WHITE);
             add(label);
             label = new JLabel("Attack:");
-            label.setBounds(preferredSize.width/7*3, 0,  preferredSize.width/7, preferredSize.height/3);
+            label.setBounds(preferredSize.width/8*3, 0,  preferredSize.width/8, preferredSize.height/3);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -95,7 +98,7 @@ public class ThingManualPanel extends JPanel {
             label.setForeground(Color.red);
             add(label);
             label= new JLabel(String.valueOf(attack));
-            label.setBounds(preferredSize.width/7*3,  preferredSize.height/3, preferredSize.width/7, preferredSize.height/3);
+            label.setBounds(preferredSize.width/8*3,  preferredSize.height/3, preferredSize.width/8, preferredSize.height/3);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -103,7 +106,7 @@ public class ThingManualPanel extends JPanel {
             label.setForeground(Color.WHITE);
             add(label);
             label= new JLabel("Defence:");
-            label.setBounds(preferredSize.width/7*4, 0,  preferredSize.width/7, preferredSize.height/3);
+            label.setBounds(preferredSize.width/8*4, 0,  preferredSize.width/8, preferredSize.height/3);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -111,7 +114,7 @@ public class ThingManualPanel extends JPanel {
             label.setForeground(Color.blue);
             add(label);
             label= new JLabel(String.valueOf(defence));
-            label.setBounds(preferredSize.width/7*4,  preferredSize.height/3, preferredSize.width/7, preferredSize.height/3);
+            label.setBounds(preferredSize.width/8*4,  preferredSize.height/3, preferredSize.width/8, preferredSize.height/3);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -120,7 +123,7 @@ public class ThingManualPanel extends JPanel {
             add(label);
 
             label= new JLabel("Coins:");
-            label.setBounds(preferredSize.width/7*5, 0,  preferredSize.width/7, preferredSize.height/3);
+            label.setBounds(preferredSize.width/8*5, 0,  preferredSize.width/8, preferredSize.height/3);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -128,7 +131,7 @@ public class ThingManualPanel extends JPanel {
             label.setForeground(Color.YELLOW);
             add(label);
             label= new JLabel(String.valueOf(coins));
-            label.setBounds(preferredSize.width/7*5,  preferredSize.height/3, preferredSize.width/7, preferredSize.height/3);
+            label.setBounds(preferredSize.width/8*5,  preferredSize.height/3, preferredSize.width/8, preferredSize.height/3);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -137,7 +140,7 @@ public class ThingManualPanel extends JPanel {
             add(label);
 
             label= new JLabel("Experiece:");
-            label.setBounds(preferredSize.width/7*6, 0,  preferredSize.width/7, preferredSize.height/3);
+            label.setBounds(preferredSize.width/8*6, 0,  preferredSize.width/8, preferredSize.height/3);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -145,7 +148,24 @@ public class ThingManualPanel extends JPanel {
             label.setForeground(Color.GREEN);
             add(label);
             label= new JLabel(String.valueOf(experience));
-            label.setBounds(preferredSize.width/7*6,  preferredSize.height/3, preferredSize.width/7, preferredSize.height/3);
+            label.setBounds(preferredSize.width/8*6,  preferredSize.height/3, preferredSize.width/8, preferredSize.height/3);
+            label.setFont(font);
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            label.setForeground(Color.WHITE);
+            add(label);
+
+            label= new JLabel("Damage:");
+            label.setBounds(preferredSize.width/8*7, 0,  preferredSize.width/8, preferredSize.height/3);
+            label.setFont(font);
+            label.setBackground(new Color(0,0,0,255));
+            label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            label.setForeground(Color.RED);
+            add(label);
+            label= new JLabel(String.valueOf(damage));
+            label.setBounds(preferredSize.width/8*7,  preferredSize.height/3, preferredSize.width/8, preferredSize.height/3);
             label.setFont(font);
             label.setBackground(new Color(0,0,0,255));
             label.setBorder(BorderFactory.createDashedBorder(Color.WHITE, 1.0f, 1.0f, 1.0f, true));
@@ -176,7 +196,7 @@ public class ThingManualPanel extends JPanel {
         ));
     }
 
-    public void insAManual(Image img, String[] name_and, int health, int attack, int defence, int coins, int exp) {
+    public void insAManual(Image img, String[] name_and, int health, int attack, int defence, int coins, int exp, int damage) {
         insAManual(
             new ThingManualInfo(
                 img,
@@ -185,9 +205,15 @@ public class ThingManualPanel extends JPanel {
                 attack,
                 defence,
                 coins,
-                exp
+                exp,
+                damage
             )
         );
+    }
+
+    @Override
+    public void removeAll() {
+        panel.removeAll();
     }
 
     public ThingManualPanel(int x,int y) {

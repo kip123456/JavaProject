@@ -23,4 +23,5 @@ public abstract class Thing {
     {
         return new Rectangle(100*posx+300,4*posy+44,100,60);
     }
+
 }

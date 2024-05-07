@@ -28,6 +28,10 @@ public class Monster extends Thing {
         posx=_posx;
         posy=_posy;
     }
+
+    public int getHel() {
+        return hel;
+    }
     public int getExp(Player p)
     {
         return exp;
