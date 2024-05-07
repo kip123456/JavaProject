@@ -8,6 +8,29 @@ import javax.sound.sampled.Clip;
 
 public class DataManager{
     static public int monster_num;
+    /*
+     * 第二维数据依次为：
+     * 0 ： 血
+     * 1 ： 攻
+     * 2 ： 防
+     * 3 ： 金
+     * 4 ： 经
+     * 5 ： 特性
+     *  采用二进制方式存储，其中：
+     *  1 ： 浮空
+     *  2 ： 先攻
+     *  4 ： 三连击
+     *  8 ： 魔攻
+     *  16 ： 坚固
+     *  32 ： 破甲（战前附带角色防御90%作为伤害）
+     *  64 ： 模仿（当角色属性更高时，属性等于角色属性）
+     *  128 ：贯杀炮（第10回合造成攻击力1000%的伤害）
+     *  256 : 怨念堆积（攻击+=仇恨值）
+     *  512 ：怨念发酵（造成仇恨值的真伤，并使仇恨值翻倍，当被技能杀死后，仇恨值减半）
+     *  1024 : 残虐（当血量低于怪物血量时，伤害翻倍）
+     *  2048 : 净化（造成角色魔防两倍的伤害）
+     * 6 ： 行走图的第几行
+     */
     static public int[][] monster_data;
     static public BufferedImage[] monster_img;
     static public BufferedImage[] icon;
@@ -23,7 +46,7 @@ public class DataManager{
         String path = Path.monsterData;
         
         try(Scanner reader = new Scanner(new File(path),"UTF-8")){
-            monster_num = reader.nextInt();
+            monster_num = Global.monsternum*4;
             monster_data = new int[monster_num][6];
             for (int i = 0;i < monster_num;++i){
                 for (int j = 0; j < 6; ++ j){
