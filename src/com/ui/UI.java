@@ -1,5 +1,15 @@
+package com.ui;
 
 import javax.swing.*;
+
+import com.Controller;
+import com.Global;
+import com.data.DataManager;
+import com.ui.panels.GamePanel;
+import com.ui.panels.HomePanel;
+import com.ui.panels.ThingManualPanel;
+import com.ui.panels.ThingManualPanel.ThingManualInfo;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -12,7 +22,7 @@ public class UI {
     Controller controller;
     UIMode mode = UIMode.HOME;
 
-    void addModePanel(UIMode mode) {
+    public void addModePanel(UIMode mode) {
         switch (mode) {
             case HOME:
                 frame.add(homePanel);
@@ -27,7 +37,7 @@ public class UI {
         }
     }
 
-    void removeModePanel(UIMode mode) {
+    public void removeModePanel(UIMode mode) {
         switch (mode) {
             case HOME:
                 frame.remove(homePanel);
@@ -43,7 +53,7 @@ public class UI {
         }
     }
 
-    void setMode(UIMode mode) {
+    public void setMode(UIMode mode) {
         if (this.mode != mode) {
             removeModePanel(this.mode);
             addModePanel(mode);
@@ -53,11 +63,11 @@ public class UI {
         }
     }
 
-    void repaint() {
+    public void repaint() {
         gamePanel.repaint();
     }
 
-    void loadThings2ManualPanel() {
+    public void loadThings2ManualPanel() {
         int num = DataManager.monster_num;
         for (int i = 0; i < num; i++) {
             String[] name_and = new String[3];
@@ -72,7 +82,7 @@ public class UI {
         }
     }
 
-    UI(Controller controller) {
+    public UI(Controller controller) {
         this.controller = controller;
         frame = new JFrame("JAVA Project");
         gamePanel = new GamePanel(controller);

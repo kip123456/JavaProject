@@ -1,5 +1,10 @@
+package com.ui.panels;
 import java.awt.*;
 import javax.swing.*;
+
+import com.Controller;
+import com.Global;
+import com.ui.UIMode;
 
 public class HomePanel extends JPanel {
 

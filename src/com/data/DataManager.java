@@ -1,3 +1,4 @@
+package com.data;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Scanner;
@@ -5,6 +6,8 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+
+import com.Global;
 
 public class DataManager{
     /*

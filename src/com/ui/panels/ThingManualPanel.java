@@ -1,4 +1,7 @@
+package com.ui.panels;
 import javax.swing.*;
+
+import com.data.DataManager;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -158,7 +161,7 @@ public class ThingManualPanel extends JPanel {
     JScrollPane scrollPane;
 
     private int countthings = 0;
-    void insAManual(OneThing oneThing) {
+    public void insAManual(OneThing oneThing) {
         countthings++;
         if(countthings >= 2) {
             panel.setPreferredSize(new Dimension(getPreferredSize().width/8*6, 150*countthings+100));
@@ -166,14 +169,14 @@ public class ThingManualPanel extends JPanel {
         panel.add(oneThing);
     }
 
-    void insAManual(ThingManualInfo thingManualInfo) {
+    public void insAManual(ThingManualInfo thingManualInfo) {
         insAManual(new OneThing(
             new Dimension(getPreferredSize().width-50, 150),
             thingManualInfo
         ));
     }
 
-    void insAManual(Image img, String[] name_and, int health, int attack, int defence, int coins, int exp) {
+    public void insAManual(Image img, String[] name_and, int health, int attack, int defence, int coins, int exp) {
         insAManual(
             new ThingManualInfo(
                 img,
@@ -187,7 +190,7 @@ public class ThingManualPanel extends JPanel {
         );
     }
 
-    ThingManualPanel(int x,int y) {
+    public ThingManualPanel(int x,int y) {
 
         setBackground(Color.BLACK);
         setLayout(new BorderLayout());
@@ -211,34 +214,9 @@ public class ThingManualPanel extends JPanel {
         add(label, BorderLayout.NORTH);
     }
 
-    ThingManualPanel() {
+    public ThingManualPanel() {
         this(600, 600);
     }
 
-    public static void main(String[] args) {
-        // 创建一个 JFrame 实例
-        JFrame frame = new JFrame("ThingManualExample");
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
-        String[] nothing = new String[3];
-        nothing[0] = "Nothing";
-        nothing[1] = "Nothing";
-        nothing[2] = "Nothing";
-        ThingManualPanel t = new ThingManualPanel();
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        t.insAManual(DataManager.player_img, nothing, 100, 10, 10, 100, 100);
-        frame.add(t);
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-    }
 }
 

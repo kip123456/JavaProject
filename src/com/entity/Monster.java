@@ -1,5 +1,11 @@
+package com.entity;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import com.Animation;
+import com.Controller;
+import com.Global;
+import com.data.DataManager;
 public class Monster extends Thing {
     /*采用二进制方式存储，其中：
      *  512 ：怨念发酵（造成仇恨值的真伤，并使仇恨值翻倍，当被技能杀死后，仇恨值减半）
@@ -92,7 +98,7 @@ public class Monster extends Thing {
         if((skill & 512) > 0)Global.hateValue /= 2;
         return new T2PMessage(0,money,exp);
     }
-    int receiveDamage(int damage,Animation animation)
+    public int receiveDamage(int damage,Animation animation)
     {
         Rectangle rec = transPos();
         animation.new_animation(1, rec.x-10, rec.y-10, rec.width+20, rec.height+20,5, DataManager.animationImg[3],0);
