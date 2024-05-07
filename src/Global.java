@@ -17,4 +17,5 @@ public class Global {
     public static final int senum = 4;
     public static final int skill_load_speed = 50;
     public static final int things_moving_speed = 4;
+    public static int hateValue = 0;
 }

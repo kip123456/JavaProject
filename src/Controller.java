@@ -190,12 +190,12 @@ public class Controller {
             if(x.posx != channelbuffer)continue;
             if(x instanceof Monster)
             {
-                damage = ((Monster)x).getDamage(damage,animation);
+                damage = ((Monster)x).receiveDamage(damage,animation);
                 if(damage == -1)
                 {
                     break;
                 }
-                player.react(((Monster)x).died());
+                player.react(((Monster)x).died_from_skill());
                 things.remove(x);
                 --i;
             }
