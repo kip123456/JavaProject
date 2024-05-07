@@ -64,8 +64,10 @@ public class UI {
             name_and[0] = String.valueOf(i*3);
             name_and[1] = String.valueOf(i*3+1);
             name_and[2] = String.valueOf(i*3+2);
+            int _width = DataManager.monster_img[0].getWidth()/4, _height = DataManager.monster_img[0].getHeight()/4;
             ThingManualPanel.ThingManualInfo info = new ThingManualPanel.ThingManualInfo
-                (DataManager.monster_img[i], name_and, 0, 0, 0, 0, 0);
+                (DataManager.monster_img[i/4].getSubimage(0, 0 , _width, _height),
+                 name_and, 0, 0, 0, 0, 0);
             thingManualPanel.insAManual(info);
         }
     }

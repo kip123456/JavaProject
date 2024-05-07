@@ -62,7 +62,7 @@ public class GamePanel extends JPanel {
         paintChannels(g2d_buffered);
         road_repaint(g2d_buffered);
         for(Thing thing: controller.things) {
-            thing.repaint(g2d_buffered);
+            thing.repaint(g2d_buffered,controller);
         }
         controller.animationpaint(g2d_buffered,0);
         BufferedImage perspectiveChessBoard = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);

@@ -13,6 +13,8 @@ public class Global {
     public static final int animationnum = 4;
     public static final int bgmnum = 5;
     public static final int monsternum = 17;
+    public static final int rewardnum = 5;
     public static final int senum = 4;
     public static final int skill_load_speed = 50;
+    public static final int things_moving_speed = 4;
 }

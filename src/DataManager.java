@@ -7,6 +7,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
 public class DataManager{
+    /*
+     * 为总怪物数量，Global为怪物图片数量
+     */
     static public int monster_num;
     /*
      * 第二维数据依次为：
@@ -36,6 +39,10 @@ public class DataManager{
     static public BufferedImage[] icon;
     static public BufferedImage[] backgroundImg;
     static public BufferedImage[] animationImg;
+    /*
+     * 第一维：血攻防魔防
+     * 第二维：数值，以2的幂增长
+     */
     static public BufferedImage[][] reward_img;
     static public BufferedImage player_img;
     static public BufferedImage[] player_imgs;
@@ -47,11 +54,12 @@ public class DataManager{
         
         try(Scanner reader = new Scanner(new File(path),"UTF-8")){
             monster_num = Global.monsternum*4;
-            monster_data = new int[monster_num][6];
+            monster_data = new int[monster_num][7];
             for (int i = 0;i < monster_num;++i){
                 for (int j = 0; j < 6; ++ j){
                     monster_data[i][j] = reader.nextInt();
                 }
+                monster_data[i][6] = i%4;
             }
         }catch (Exception e) {
             System.out.println("monster data read error");
@@ -59,8 +67,8 @@ public class DataManager{
 
         path = Path.monsterImg;
         try{
-            monster_img = new BufferedImage[monster_num];
-            for(int i=0;i<monster_num;++i){
+            monster_img = new BufferedImage[Global.monsternum];
+            for(int i=0;i<Global.monsternum;++i){
                 monster_img[i] = ImageIO.read(new File(path+"/"+i+".png"));
             }
         }catch(Exception e){
@@ -97,6 +105,28 @@ public class DataManager{
             System.out.println("animation img read error");
         }
 
+        path = Path.rewardImg;
+        try{
+            reward_img = new BufferedImage[4][20];
+            BufferedImage readbuffer;
+            readbuffer = ImageIO.read(new File(path+"/4.png"));
+            int _width = readbuffer.getWidth()/4,_height = readbuffer.getHeight()/4;
+            for(int i=0;i<8;++i)
+            reward_img[0][i] = readbuffer.getSubimage((i%4)*_width, (i/4)*_height, _width, _height);
+            for(int i=0;i<4;++i){
+                readbuffer = ImageIO.read(new File(path+"/"+i+".png"));
+                for(int j = 0; j < 4 ; ++j)
+                {
+                    for(int k = 0; k< 3; ++ k)
+                    {
+                        reward_img[k+1][j+i*4] = readbuffer.getSubimage(k*_width, j*_height, _width, _height);
+                    }
+                }
+            }
+        }catch(Exception e){
+            System.out.println("reward img read error");
+        }
+
         path = Path.bgm;
         try{
             bgm = new Clip[Global.bgmnum];
@@ -119,20 +149,7 @@ public class DataManager{
             System.out.println("bgm load error");
         }
 
-        path = Path.rewardImg;
-        try{
-            reward_img = new BufferedImage[4][10];
-            //atk def mdef
-            for(int i=1;i<=3;++i){
-                reward_img[i][0] = ImageIO.read(new File(path+"/103-0"+i+".png"));
-            }
-            //hel
-            for(int i=5;i<=8;++i){
-                reward_img[0][i-5] = ImageIO.read(new File(path+"/103-0"+i+".png"));
-            }
-        }catch(Exception e){
-            System.out.println("reward img read error");
-        }
+        
         path = Path.playerImg;
         try{
             player_img = ImageIO.read(new File(path));

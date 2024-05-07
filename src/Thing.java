@@ -11,16 +11,12 @@ public abstract class Thing {
     boolean haveHeight=false;
     public void move()
     {
-        posy+=4;
+        posy+=Global.things_moving_speed;
     }
     abstract T2PMessage interact(Player p);
+    abstract public void repaint(Graphics g,Controller controller);
     public Rectangle transPos()
     {
         return new Rectangle(100*posx+300,4*posy+44,100,60);
-    }
-    public void repaint(Graphics g)
-    {
-        Rectangle rect = transPos();
-        g.drawImage(myImage, rect.x, rect.y, rect.width, rect.height, null);
     }
 }

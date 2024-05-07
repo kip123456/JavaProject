@@ -120,15 +120,15 @@ public class Controller {
         int random_num = rand.nextInt(100)+1;//[1,100]
         if(random_num<=6)
         {
-            things.add(new Rewards(random_num/2, 0,road_id,0));
+            things.add(new Rewards(random_num/2, rand.nextInt(12),road_id,0));
         }//atk or def or mdef generate
         else if(random_num<=10)
         {
-            things.add(new Rewards(0, 0,road_id,0));
+            things.add(new Rewards(0, rand.nextInt(8),road_id,0));
         }//hel generate
         else
         {
-            things.add(new Monster((random_num-11)/(90/DataManager.monster_num), road_id, 0));
+            things.add(new Monster(rand.nextInt(DataManager.monster_num), road_id, 0));
         }//monster generate
     }
     void generateThings() {

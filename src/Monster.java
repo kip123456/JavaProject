@@ -1,7 +1,8 @@
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class Monster extends Thing {
-    int catagory,hel,atk,def,skill,money,exp;
+    int catagory,hel,atk,def,skill,money,exp,myrow;
     public Monster(int id,int _posx,int _posy){
         hel = DataManager.monster_data[id][0];
         atk = DataManager.monster_data[id][1];
@@ -9,7 +10,8 @@ public class Monster extends Thing {
         money = DataManager.monster_data[id][3];
         exp = DataManager.monster_data[id][4];
         skill = DataManager.monster_data[id][5];
-        myImage = DataManager.monster_img[id];
+        myrow = DataManager.monster_data[id][6];
+        myImage = DataManager.monster_img[id/4];
         posx=_posx;
         posy=_posy;
     }
@@ -36,5 +38,10 @@ public class Monster extends Thing {
         hel -= damage - def;
         if(hel <= 0)return -hel;
         return -1;
+    }
+    public void repaint(Graphics g,Controller controller)
+    {
+        Rectangle rect = transPos();
+        controller.dynamic_draw(g, myImage, myrow, rect.x, rect.y, rect.width, rect.height);
     }
 }
