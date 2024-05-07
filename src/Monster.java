@@ -73,6 +73,8 @@ public class Monster extends Thing {
         if((skill & 512) > 0)damage += Global.hateValue;
         //残虐处理
         if((skill & 1024) > 0 && p.health < hel)damage *= 2;
+
+        return damage;
     }
     
     public T2PMessage interact(Player p)
