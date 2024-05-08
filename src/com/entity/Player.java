@@ -1,3 +1,4 @@
+package com.entity;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
@@ -5,21 +6,26 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.xml.crypto.Data;
 
+import com.Controller;
+import com.Global;
+import com.SEController;
+import com.data.DataManager;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
 public class Player {
-    int health, defense, attack, magicDefense,money,exp;
-    int posx, posy, posz;
-    int lrSteps;
-    int udSteps;
-    int inhurt;
-    int skill_loader;//技能条，10000为一次技能
-    int skill_damage_rate;//技能伤害比率，初始为10倍攻击
-    int skill_load_speed;//技能恢复速度
-    int skill_store;//能存储多少技能蓄力
-    BufferedImage[] imgs;
+    public int health, defense, attack, magicDefense,money,exp;
+    public int posx, posy, posz;
+    public int lrSteps;
+    public int udSteps;
+    public int inhurt;
+    public int skill_loader;//技能条，10000为一次技能
+    public int skill_damage_rate;//技能伤害比率，初始为10倍攻击
+    public int skill_load_speed;//技能恢复速度
+    public int skill_store;//能存储多少技能蓄力
+    public BufferedImage[] imgs;
     public Player() {
         health = 10000;
         defense = 10;
@@ -107,19 +113,19 @@ public class Player {
     }
 
     //将posz计算分离至repaint，否则对空中怪物meet计算会出错
-    Rectangle transRectangle() {
+    public Rectangle transRectangle() {
         return new Rectangle((int)(1.0* posx/Global.TICKS_PER_PLAYER_MOVE*100+325),
         posy*4+44, 50,50);
     }
     //posz参数修正改为二次函数
-    void repaint(Graphics g,Controller controller)
+    public void repaint(Graphics g,Controller controller)
     {
         Rectangle rect = transRectangle();
         rect.translate(0, - ((int)(1.0*posz/Global.TICKS_PER_PLAYER_MOVE*Global.MAX_PLAYER_JUMP))-posz*posz*2);
         controller.dynamic_draw(g, imgs[inhurt], 0,rect.x, rect.y, rect.width, rect.height);
     }
 
-    void status_repaint(Graphics g)
+    public void status_repaint(Graphics g)
     {
         g.drawImage(DataManager.backgroundImg[1], 0, 100,200,600, null);
         int[] hc = new int[]{health,attack,defense,magicDefense,exp,money};
@@ -137,7 +143,7 @@ public class Player {
         g.setFont(g.getFont().deriveFont(12f));
         g.drawString(skill_loader/10000+" / "+skill_store/10000, 130, 334);
     }
-    int useSkill()
+    public int useSkill()
     {
         if(skill_loader>=10000&&lrSteps<=1&&udSteps<=1)
         {

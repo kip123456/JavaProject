@@ -1,8 +1,23 @@
+package com.ui;
 
 import javax.swing.*;
+
+import com.Controller;
+import com.Global;
+import com.data.DataManager;
+import com.ui.panels.GamePanel;
+import com.ui.panels.HomePanel;
+import com.ui.panels.ThingManualPanel;
+import com.ui.panels.ThingManualPanel.ThingManualInfo;
+
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.List;
+
+import com.entity.Monster;
+import com.entity.Thing;
+import com.entity.Player;
 
 public class UI {
     JFrame frame;
@@ -12,7 +27,7 @@ public class UI {
     Controller controller;
     UIMode mode = UIMode.HOME;
 
-    void addModePanel(UIMode mode) {
+    public void addModePanel(UIMode mode) {
         switch (mode) {
             case HOME:
                 frame.add(homePanel);
@@ -21,13 +36,14 @@ public class UI {
                 frame.add(gamePanel);
                 break;
             case MANUAL:
+                loadThings2ManualPanel(controller.things, controller.player);
                 frame.add(thingManualPanel);
             default:
                 break;
         }
     }
 
-    void removeModePanel(UIMode mode) {
+    public void removeModePanel(UIMode mode) {
         switch (mode) {
             case HOME:
                 frame.remove(homePanel);
@@ -43,7 +59,7 @@ public class UI {
         }
     }
 
-    void setMode(UIMode mode) {
+    public void setMode(UIMode mode) {
         if (this.mode != mode) {
             removeModePanel(this.mode);
             addModePanel(mode);
@@ -53,32 +69,43 @@ public class UI {
         }
     }
 
-    void repaint() {
+    public void repaint() {
         gamePanel.repaint();
     }
 
-    void loadThings2ManualPanel() {
-        int num = DataManager.monster_num;
-        for (int i = 0; i < num; i++) {
-            String[] name_and = new String[3];
-            name_and[0] = String.valueOf(i*3);
-            name_and[1] = String.valueOf(i*3+1);
-            name_and[2] = String.valueOf(i*3+2);
-            int _width = DataManager.monster_img[0].getWidth()/4, _height = DataManager.monster_img[0].getHeight()/4;
-            ThingManualPanel.ThingManualInfo info = new ThingManualPanel.ThingManualInfo
-                (DataManager.monster_img[i/4].getSubimage(0, 0 , _width, _height),
-                 name_and, 0, 0, 0, 0, 0);
-            thingManualPanel.insAManual(info);
+    public void loadThings2ManualPanel(List<Thing> things, Player player) {
+        thingManualPanel.removeAll();
+        int i = 0;
+        for(Thing thing: things) {
+            if(thing instanceof Monster) {
+                Monster monster = (Monster) thing;
+                ThingManualInfo info = new ThingManualInfo(
+                    monster.myImage,
+                    new String[]{
+                        String.valueOf(i*3),
+                        String.valueOf(i*3+1),
+                        String.valueOf(i*3+2)
+                    },
+                    monster.getHel(),
+                    monster.getAtk(player),
+                    monster.getDef(player),
+                    monster.getMoney(player),
+                    monster.getExp(player),
+                    monster.getDamage(player)
+                );
+                thingManualPanel.insAManual(info);
+
+                i++;
+            }
         }
     }
 
-    UI(Controller controller) {
+    public UI(Controller controller) {
         this.controller = controller;
         frame = new JFrame("JAVA Project");
         gamePanel = new GamePanel(controller);
         homePanel = new HomePanel(controller);
         thingManualPanel = new ThingManualPanel(800,800);
-        loadThings2ManualPanel();
 
 
         frame.add(homePanel);

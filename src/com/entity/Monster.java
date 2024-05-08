@@ -1,5 +1,11 @@
+package com.entity;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import com.Animation;
+import com.Controller;
+import com.Global;
+import com.data.DataManager;
 public class Monster extends Thing {
     final static int INFdamage = 999999999;
     int skill;
@@ -17,6 +23,10 @@ public class Monster extends Thing {
         myImage = DataManager.monster_img[id/4];
         posx=_posx;
         posy=_posy;
+    }
+
+    public int getHel() {
+        return hel;
     }
     public int getExp(Player p)
     {
@@ -88,7 +98,7 @@ public class Monster extends Thing {
         if((skill & 512) > 0)Global.hateValue /= 2;
         return new T2PMessage(0,money,exp);
     }
-    int receiveDamage(int damage,Animation animation)
+    public int receiveDamage(int damage,Animation animation)
     {
         Rectangle rec = transPos();
         animation.new_animation(1, rec.x-10, rec.y-10, rec.width+20, rec.height+20,5, DataManager.animationImg[3],0);

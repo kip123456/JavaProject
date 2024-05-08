@@ -1,3 +1,4 @@
+package com;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -8,13 +9,23 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.sound.sampled.Clip;
+
+import com.data.DataManager;
+import com.entity.Monster;
+import com.entity.MovingState;
+import com.entity.Player;
+import com.entity.Rewards;
+import com.entity.Thing;
+import com.ui.UI;
+import com.ui.UIMode;
+
 import java.util.*;
 
 
 public class Controller {
-    UIMode lastMode = UIMode.HOME;
-    UIMode uiMode = UIMode.HOME;
-    Lock ui_lock = new ReentrantLock();
+    public UIMode lastMode = UIMode.HOME;
+    public UIMode uiMode = UIMode.HOME;
+    public Lock ui_lock = new ReentrantLock();
 
     UI ui;
 
@@ -24,21 +35,21 @@ public class Controller {
      * 2 玩家失败
      */
     int gameover = 0,bossHel=1000,maxbossHel=1000;
-    Lock wasd_lock = new ReentrantLock();
-    char wKey = ' ' , adKey = ' ', fKey = ' ';
-    Animation animation = new Animation();
-    SEController seController = new SEController();
+    public Lock wasd_lock = new ReentrantLock();
+    public char wKey = ' ' , adKey = ' ', fKey = ' ';
+    public Animation animation = new Animation();
+    public SEController seController = new SEController();
     
 
     /**
      * 角色
      */
-    Player player = new Player();
+    public Player player = new Player();
 
     /**
      * 存放滑块的集合
      */
-    List<Thing> things = new LinkedList<>();
+    public List<Thing> things = new LinkedList<>();
 
     /**
      * 0: 无尽模式
@@ -54,13 +65,13 @@ public class Controller {
         ui = new UI(this);
     }
 
-    UIMode getUIMode() {
+    public UIMode getUIMode() {
         ui_lock.lock();
         UIMode mode = uiMode;
         ui_lock.unlock();
         return mode;
     }
-    void setUIMode(UIMode mode) {
+    public void setUIMode(UIMode mode) {
         ui_lock.lock();
         if(uiMode != mode)
             lastMode = uiMode;
@@ -68,7 +79,7 @@ public class Controller {
         ui_lock.unlock();
     }
 
-    UIMode getLastUiMode() {
+    public UIMode getLastUiMode() {
         ui_lock.lock();
         UIMode mode = lastMode;
         ui_lock.unlock();
@@ -311,14 +322,14 @@ public class Controller {
     /**
      * 重绘ui
      */
-    void repaint() {
+    public void repaint() {
         ui.repaint();
     }
-    void animationpaint(Graphics g,int mode)
+    public void animationpaint(Graphics g,int mode)
     {
         animation.paint(g,mode);
     }
-    void bossHelBar(Graphics g)
+    public void bossHelBar(Graphics g)
     {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));

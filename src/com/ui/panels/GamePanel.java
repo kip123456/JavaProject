@@ -1,8 +1,16 @@
+package com.ui.panels;
 
 import java.awt.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import com.Controller;
+import com.Global;
+import com.data.DataManager;
+import com.entity.Thing;
+import com.ui.UIMode;
+
 import java.awt.image.*;
 import java.io.File;
 import java.awt.event.*;

@@ -1,5 +1,9 @@
+package com.entity;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import com.Controller;
+import com.data.DataManager;
 
 public class Rewards extends Thing{
     int catagory,hel,atk,def,mdef,money,exp;
