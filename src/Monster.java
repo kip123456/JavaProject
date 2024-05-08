@@ -1,10 +1,6 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
 public class Monster extends Thing {
-    /*采用二进制方式存储，其中：
-     *  512 ：怨念发酵（造成仇恨值的真伤，并使仇恨值翻倍，当被技能杀死后，仇恨值减半）
-     *  1024 : 残虐（当血量低于怪物血量时，伤害翻倍）
-     */
     final static int INFdamage = 999999999;
     int skill;
     int catagory,hel,atk,def,money,exp,myrow;
