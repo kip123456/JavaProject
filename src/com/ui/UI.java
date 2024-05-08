@@ -3,8 +3,8 @@ package com.ui;
 import javax.swing.*;
 
 import com.Controller;
-import com.Global;
 import com.data.DataManager;
+import com.data.Global;
 import com.ui.panels.GamePanel;
 import com.ui.panels.HomePanel;
 import com.ui.panels.ThingManualPanel;

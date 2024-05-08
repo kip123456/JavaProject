@@ -7,7 +7,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import com.Controller;
-import com.Global;
+import com.data.Global;
 
 public abstract class Thing {
     public int posx,posy;

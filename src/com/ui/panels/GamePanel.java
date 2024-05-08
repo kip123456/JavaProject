@@ -6,8 +6,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import com.Controller;
-import com.Global;
 import com.data.DataManager;
+import com.data.Global;
 import com.entity.Thing;
 import com.ui.UIMode;
 

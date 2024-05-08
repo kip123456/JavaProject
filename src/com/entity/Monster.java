@@ -2,10 +2,10 @@ package com.entity;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import com.Animation;
 import com.Controller;
-import com.Global;
 import com.data.DataManager;
+import com.data.Global;
+import com.ui.Animation;
 public class Monster extends Thing {
     final static int INFdamage = 999999999;
     int skill;

@@ -7,8 +7,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-import com.Global;
-
 public class DataManager{
     /*
      * 为总怪物数量，Global为怪物图片数量

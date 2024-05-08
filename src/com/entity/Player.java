@@ -7,9 +7,9 @@ import javax.swing.SwingUtilities;
 import javax.xml.crypto.Data;
 
 import com.Controller;
-import com.Global;
 import com.SEController;
 import com.data.DataManager;
+import com.data.Global;
 
 import java.awt.Color;
 import java.awt.Font;

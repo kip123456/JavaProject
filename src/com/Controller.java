@@ -11,11 +11,13 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.sound.sampled.Clip;
 
 import com.data.DataManager;
+import com.data.Global;
 import com.entity.Monster;
 import com.entity.MovingState;
 import com.entity.Player;
 import com.entity.Rewards;
 import com.entity.Thing;
+import com.ui.Animation;
 import com.ui.UI;
 import com.ui.UIMode;
 
