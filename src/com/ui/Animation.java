@@ -1,4 +1,4 @@
-package com;
+package com.ui;
 import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

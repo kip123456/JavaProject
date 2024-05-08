@@ -1,4 +1,4 @@
-package com;
+package com.data;
 public class Global {
     public static final int TICK_PER_SEC = 50;
     public static final int CHANNEL_WIDTH = 4;
