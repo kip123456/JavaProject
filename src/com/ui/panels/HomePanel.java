@@ -23,7 +23,7 @@ public class HomePanel extends JPanel {
             int button_height = height / (button_num*2+1);
             button1 = new JButton("New Game");
             button2 = new JButton("Load Game");
-            button3 = new JButton("Exit");
+            button3 = new JButton("Help");
 
             button1.setFont(new Font("Arial", Font.BOLD, 32));
             button2.setFont(new Font("Arial", Font.BOLD, 32));
@@ -48,7 +48,12 @@ public class HomePanel extends JPanel {
 
 
             button1.addActionListener((e) -> {
-                controller.setUIMode(UIMode.GAMEING);
+                controller.setUIMode(UIMode.MISSONSELECT);
+            });
+            
+
+            button3.addActionListener((e) -> {
+                controller.setUIMode(UIMode.HELP);
             });
 
 

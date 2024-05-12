@@ -58,6 +58,20 @@ public class Controller {
      * 否则: 其他模式
      */
     int gamemode=0;
+
+    Lock gamemodeLock = new ReentrantLock();
+    public int getGamemode() {
+        gamemodeLock.lock();
+        int mode = gamemode;
+        gamemodeLock.unlock();
+        return mode;
+    }
+    public int setGamemode(int mode) {
+        gamemodeLock.lock();
+        gamemode = mode;
+        gamemodeLock.unlock();
+        return mode;
+    }
     Random rand = new Random(System.currentTimeMillis());
 
     
@@ -151,7 +165,7 @@ public class Controller {
             return;
         }
         lst_gen = Global.GENERATE_PADDING;
-        if(gamemode == 0)
+        if(getGamemode() == 0)
         {
             int random_num = rand.nextInt(15);
             for(int i=0,j=1;i<=3;++i,j<<=1)
@@ -298,7 +312,7 @@ public class Controller {
      * 判断游戏是否结束（或者之类的？）
      */
     void judge() {
-        if(gamemode == 0)return;
+        if(getGamemode() == 0)return;
 
         if(player.health <=0) {
             System.out.println("Game Over!");

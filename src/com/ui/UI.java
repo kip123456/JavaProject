@@ -9,6 +9,8 @@ import com.ui.panels.GamePanel;
 import com.ui.panels.HomePanel;
 import com.ui.panels.ThingManualPanel;
 import com.ui.panels.ThingManualPanel.ThingManualInfo;
+import com.ui.panels.MissionSelectPanel;
+import com.ui.panels.HelpPanel;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -24,6 +26,8 @@ public class UI {
     GamePanel gamePanel;
     HomePanel homePanel;
     ThingManualPanel thingManualPanel;
+    MissionSelectPanel missionSelectPanel;
+    HelpPanel helpPanel;
     Controller controller;
     UIMode mode = UIMode.HOME;
 
@@ -38,6 +42,13 @@ public class UI {
             case MANUAL:
                 loadThings2ManualPanel(controller.things, controller.player);
                 frame.add(thingManualPanel);
+                break;
+            case MISSONSELECT:
+                frame.add(missionSelectPanel);
+                break;
+            case HELP:
+                frame.add(helpPanel);
+                break;
             default:
                 break;
         }
@@ -54,6 +65,13 @@ public class UI {
                 break;
             case MANUAL:
                 frame.remove(thingManualPanel);
+                break;
+            case MISSONSELECT:
+                frame.remove(missionSelectPanel);
+                break;
+            case HELP:
+                frame.remove(helpPanel);
+                break;
             default:
                 break;
         }
@@ -106,7 +124,9 @@ public class UI {
         gamePanel = new GamePanel(controller);
         homePanel = new HomePanel(controller);
         thingManualPanel = new ThingManualPanel(800,800);
-
+        missionSelectPanel = new MissionSelectPanel(controller, Global.missionNum);
+        helpPanel = new HelpPanel(controller);
+        helpPanel.addHelpMessage("This is for help.");
 
         frame.add(homePanel);
 
