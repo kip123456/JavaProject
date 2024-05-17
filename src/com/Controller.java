@@ -63,6 +63,20 @@ public class Controller {
      * 否则: 其他模式
      */
     int gamemode=0;
+
+    Lock gamemodeLock = new ReentrantLock();
+    public int getGamemode() {
+        gamemodeLock.lock();
+        int mode = gamemode;
+        gamemodeLock.unlock();
+        return mode;
+    }
+    public int setGamemode(int mode) {
+        gamemodeLock.lock();
+        gamemode = mode;
+        gamemodeLock.unlock();
+        return mode;
+    }
     /*
      * 从0开始，每一个阶段最多10种怪物
      */
@@ -148,7 +162,13 @@ public class Controller {
         }
     }
     void generateThings() {
-        if(gamemode == 0)
+        if(lst_gen != 0)
+        {
+            --lst_gen;
+            return;
+        }
+        lst_gen = Global.GENERATE_PADDING;
+        if(getGamemode() == 0)
         {
             if(ticks_already >= Global.stage_tick[now_stage])
             {
@@ -299,7 +319,7 @@ public class Controller {
      * 判断游戏是否结束（或者之类的？）
      */
     void judge() {
-        if(gamemode == 0)return;
+        if(getGamemode() == 0)return;
 
         if(player.health <=0) {
             System.out.println("Game Over!");
