@@ -10,4 +10,6 @@ public class App {
  *(DataManager.monster_img[i/4].getSubimage(0, (i%4)*_height, _width, _height),
  *
  * mention : 在进入新的一局游戏时，记得Global.hateValue = 0
+ *          ：可能的优化思路：状态栏可以单拿出来，只有在更新时重画
+ *          ：              setDoubleBuffered(true)
  */

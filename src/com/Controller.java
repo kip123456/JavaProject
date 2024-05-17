@@ -37,10 +37,15 @@ public class Controller {
      * 2 玩家失败
      */
     int gameover = 0,bossHel=1000,maxbossHel=1000;
+    /*
+     * 有且仅有now_stage stage_tick[] stage_hel/atk/...[] 为从1开始计数
+     */
+    int now_stage=0;
     public Lock wasd_lock = new ReentrantLock();
     public char wKey = ' ' , adKey = ' ', fKey = ' ';
     public Animation animation = new Animation();
     public SEController seController = new SEController();
+    public GenController genController = new GenController();
     
 
     /**
@@ -58,6 +63,10 @@ public class Controller {
      * 否则: 其他模式
      */
     int gamemode=0;
+    /*
+     * 从0开始，每一个阶段最多10种怪物
+     */
+    int Monster_Stage = 0;
     Random rand = new Random(System.currentTimeMillis());
 
     
@@ -127,40 +136,32 @@ public class Controller {
     /**
      * 产生新的滑块
      */
-    int lst_gen = 0;
-    void generateThings(int road_id)
+    void react(G2CMessage x)
     {
-        int random_num = rand.nextInt(100)+1;//[1,100]
-        if(random_num<=6)
+        for(int i=0;i<Global.CHANNEL_COUNT;++i)
         {
-            things.add(new Rewards(random_num/2, rand.nextInt(12),road_id,0));
-        }//atk or def or mdef generate
-        else if(random_num<=10)
-        {
-            things.add(new Rewards(0, rand.nextInt(8),road_id,0));
-        }//hel generate
-        else
-        {
-            things.add(new Monster(rand.nextInt(DataManager.monster_num), road_id, 0));
-        }//monster generate
+            if(x.kind[i] == -1)continue;
+            if(x.kind[i]<6)
+            things.add(new Rewards(x.kind[i], x.num[i], i, 0));
+            else
+            things.add(new Monster(Global.monsterChosen[now_stage-1][x.kind[i]-6], i, 0));
+        }
     }
     void generateThings() {
-        if(lst_gen != 0)
-        {
-            --lst_gen;
-            return;
-        }
-        lst_gen = Global.GENERATE_PADDING;
         if(gamemode == 0)
         {
-            int random_num = rand.nextInt(15);
-            for(int i=0,j=1;i<=3;++i,j<<=1)
+            if(ticks_already >= Global.stage_tick[now_stage])
             {
-                if((j&random_num)>0)
-                {
-                    generateThings(i);
-                }
+                ++now_stage;
+                genController.set(now_stage-1, Global.stage_tick[now_stage]-ticks_already, 
+                DataManager.stage_hel[now_stage], 
+                DataManager.stage_atk[now_stage],
+                DataManager.stage_def[now_stage],
+                DataManager.stage_mdef[now_stage],
+                DataManager.stage_exp[now_stage],
+                Global.monsterChosen[now_stage-1].length);
             }
+            react(genController.gen());
         }
         else
         {

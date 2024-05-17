@@ -36,6 +36,7 @@ public class DataManager{
      * 6 ： 行走图的第几行
      */
     static public int[][] monster_data;
+    static public int[] stage_hel,stage_atk,stage_def,stage_mdef,stage_exp;
     static public BufferedImage[] monster_img;
     static public BufferedImage[] icon;
     static public BufferedImage[] backgroundImg;
@@ -64,6 +65,29 @@ public class DataManager{
             }
         }catch (Exception e) {
             System.out.println("monster data read error");
+        }
+
+        path = Path.stageData;
+        
+        try(Scanner reader = new Scanner(new File(path),"UTF-8")){
+            for(int i=0; i<Global.stage_num;++i)
+            {
+                stage_hel[i] = reader.nextInt();
+                stage_atk[i] = reader.nextInt();
+                stage_def[i] = reader.nextInt();
+                stage_mdef[i] = reader.nextInt();
+                stage_exp[i] = reader.nextInt();
+            }
+            for(int i = Global.stage_num-1 ; i >= 1; --i)
+            {
+                stage_hel[i] -= stage_hel[i-1];
+                stage_atk[i] -= stage_atk[i-1];
+                stage_def[i] -= stage_def[i-1];
+                stage_mdef[i] -= stage_mdef[i-1];
+                stage_exp[i] -= stage_exp[i-1];
+            }
+        }catch (Exception e) {
+            System.out.println("stage data read error");
         }
 
         path = Path.monsterImg;

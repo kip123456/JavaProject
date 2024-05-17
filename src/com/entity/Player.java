@@ -27,7 +27,7 @@ public class Player {
     public int skill_store;//能存储多少技能蓄力
     public BufferedImage[] imgs;
     public Player() {
-        health = 10000;
+        health = 300;
         defense = 10;
         attack = 10;
         magicDefense = 10;
@@ -39,8 +39,7 @@ public class Player {
         imgs = DataManager.player_imgs;
         skill_damage_rate = 10;
         skill_loader = 0;
-        skill_load_speed = Global.skill_load_speed*4;
-        //ps：测试模式，血量和技能恢复速度增加
+        skill_load_speed = Global.skill_load_speed;
     }
     public void react(T2PMessage msg) {
         if(msg.hel < 0)
