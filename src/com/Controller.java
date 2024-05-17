@@ -162,12 +162,6 @@ public class Controller {
         }
     }
     void generateThings() {
-        if(lst_gen != 0)
-        {
-            --lst_gen;
-            return;
-        }
-        lst_gen = Global.GENERATE_PADDING;
         if(getGamemode() == 0)
         {
             if(ticks_already >= Global.stage_tick[now_stage])
