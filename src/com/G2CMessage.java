@@ -13,5 +13,7 @@ public class G2CMessage {
     {
         kind = new int[Global.CHANNEL_COUNT];
         num = new int[Global.CHANNEL_COUNT];
+        for(int i=0;i<4;++i)
+        kind[i]=-1;
     }
 }

@@ -152,6 +152,7 @@ public class Controller {
      */
     void react(G2CMessage x)
     {
+        if(x == null)return;
         for(int i=0;i<Global.CHANNEL_COUNT;++i)
         {
             if(x.kind[i] == -1)continue;

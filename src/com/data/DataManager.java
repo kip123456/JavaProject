@@ -70,6 +70,11 @@ public class DataManager{
         path = Path.stageData;
         
         try(Scanner reader = new Scanner(new File(path),"UTF-8")){
+            stage_hel = new int[Global.stage_num];
+            stage_atk = new int[Global.stage_num];
+            stage_def = new int[Global.stage_num];
+            stage_mdef = new int[Global.stage_num];
+            stage_exp = new int[Global.stage_num];
             for(int i=0; i<Global.stage_num;++i)
             {
                 stage_hel[i] = reader.nextInt();
