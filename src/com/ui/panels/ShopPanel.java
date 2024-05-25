@@ -61,7 +61,7 @@ public class ShopPanel extends JPanel {
 
         label = new JLabel();
         label.setForeground(Color.WHITE);
-        label.setFont(new Font("SimSun", Font.BOLD, 32));
+        label.setFont(new Font("SimSun", Font.BOLD, 25));
         label.setText("您所持有的经验为：，需要付出的经验为：");
         label.setPreferredSize(new Dimension(size.width/3, 50));
         label.setBackground(Color.BLACK);

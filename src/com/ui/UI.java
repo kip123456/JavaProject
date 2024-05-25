@@ -102,7 +102,13 @@ public class UI {
     }
 
     public void repaint() {
-        gamePanel.repaint();
+        try {
+            SwingUtilities.invokeAndWait(() -> {
+                gamePanel.repaint();
+            });
+        } catch(Exception e) {
+            System.out.println(e.getStackTrace());
+        }
     }
 
     static Image getMonsterImage(int id) {

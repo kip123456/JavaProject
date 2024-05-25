@@ -22,9 +22,9 @@ public class Player {
     public int health;
     public int defense;
     public int attack;
-    private Lock healthLock;
-    private Lock defenseLock;
-    private Lock attackLock;
+    private Lock healthLock=new ReentrantLock();
+    private Lock defenseLock=new ReentrantLock();
+    private Lock attackLock=new ReentrantLock();
 
     public int getHealth() {
         healthLock.lock();
@@ -84,7 +84,7 @@ public class Player {
     }
 
     public int  magicDefense,money,exp;
-    private Lock expLock;
+    private Lock expLock=new ReentrantLock();
     public int getExp() {
         expLock.lock();
         try {
