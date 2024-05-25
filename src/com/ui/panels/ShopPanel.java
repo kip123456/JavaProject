@@ -57,7 +57,7 @@ public class ShopPanel extends JPanel {
         nothing.setPreferredSize(new Dimension(Global.WINDOW_WIDTH/6, Global.WINDOW_WIDTH/6));
         add(nothing, BorderLayout.SOUTH);
 
-        innerPanel.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
 
         label = new JLabel();
         label.setForeground(Color.WHITE);

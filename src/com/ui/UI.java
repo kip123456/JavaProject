@@ -107,8 +107,8 @@ public class UI {
 
     static Image getMonsterImage(int id) {
         BufferedImage img = DataManager.monster_img[id/4];
-        int width = img.getWidth(null);
-        int height = img.getHeight(null);
+        int width = img.getWidth(null)/4;
+        int height = img.getHeight(null)/4;
         return (Image)(img.getSubimage(0, (id%4)*height, width, height));
     }
 
@@ -149,7 +149,7 @@ public class UI {
                 ans.add(talentsname[i]);
             }
         }
-        return (String[]) ans.toArray();
+        return ans.toArray(new String[ans.size()]);
     }
     public void loadThings2ManualPanel(List<Thing> things, Player player) {
         thingManualPanel.removeAll();
