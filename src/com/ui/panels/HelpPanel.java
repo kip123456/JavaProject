@@ -19,7 +19,7 @@ public class HelpPanel extends JPanel {
             setBackground(Color.WHITE);
             textArea = new JTextArea();
             textArea.setEditable(false);
-            textArea.setFont(new Font("Arial", Font.PLAIN, 20));
+            textArea.setFont(new Font("宋体", Font.PLAIN, 18));
             add(textArea);
         }
     }
@@ -27,8 +27,7 @@ public class HelpPanel extends JPanel {
     InnerPanel innerPanel;
 
     public void addHelpMessage(String msg) {
-        ++msgNum;
-        textArea.append(msgNum + "\t" + msg + "\n\n\n\n");
+        textArea.append(msg+"\n");
     }
 
     // missionNum 不包括无尽模式
@@ -48,22 +47,22 @@ public class HelpPanel extends JPanel {
         homeButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(homeButton);
         
-        innerPanel = this.new InnerPanel(new Dimension(Global.WINDOW_WIDTH/5*3, Global.WINDOW_WIDTH/5*3));
-        innerPanel.setBounds(Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5*3, Global.WINDOW_WIDTH/5*3);
+        innerPanel = this.new InnerPanel(new Dimension(Global.WINDOW_WIDTH/5*4, Global.WINDOW_WIDTH/5*4));
+        innerPanel.setBounds(Global.WINDOW_WIDTH/10, Global.WINDOW_WIDTH/10, Global.WINDOW_WIDTH/5*4, Global.WINDOW_WIDTH/5*4);
         add(innerPanel);
 
         JLabel nothing;
         nothing = new JLabel();
-        nothing.setPreferredSize(new Dimension(Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5));
+        nothing.setPreferredSize(new Dimension(Global.WINDOW_WIDTH/10, Global.WINDOW_WIDTH/10));
         add(nothing, BorderLayout.WEST);
         nothing = new JLabel();
-        nothing.setPreferredSize(new Dimension(Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5));
+        nothing.setPreferredSize(new Dimension(Global.WINDOW_WIDTH/10, Global.WINDOW_WIDTH/10));
         add(nothing, BorderLayout.EAST);
         nothing = new JLabel();
-        nothing.setPreferredSize(new Dimension(Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5));
+        nothing.setPreferredSize(new Dimension(Global.WINDOW_WIDTH/10, Global.WINDOW_WIDTH/10));
         add(nothing, BorderLayout.NORTH);
         nothing = new JLabel();
-        nothing.setPreferredSize(new Dimension(Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5));
+        nothing.setPreferredSize(new Dimension(Global.WINDOW_WIDTH/10, Global.WINDOW_WIDTH/10));
         add(nothing, BorderLayout.SOUTH);
     }
     

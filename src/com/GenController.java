@@ -72,7 +72,6 @@ public class GenController {
         {
             ticklst = length / 10;
             diflst = a.nextInt(0, 4);
-            diflst = 3;
             for(int i=0;i<myvar.length;++i)myvar[i]=0;
             if(diflst==1)
             {
