@@ -3,6 +3,7 @@ package com.ui;
 import javax.swing.*;
 
 import com.Controller;
+import com.Saver;
 import com.data.DataManager;
 import com.data.Global;
 import com.ui.panels.GamePanel;
@@ -16,6 +17,8 @@ import com.ui.panels.HelpPanel;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -265,7 +268,15 @@ public class UI {
         });
         frame.setFocusable(true);
         frame.requestFocusInWindow();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Saver.save(Global.saveData);
+                System.out.println("saving data");
+                System.exit(0);
+            }
+        });
         frame.setVisible(true);
     }
 }

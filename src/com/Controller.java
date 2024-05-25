@@ -51,7 +51,14 @@ public class Controller {
     /**
      * 角色
      */
-    public Player player = new Player();
+    public Player player;
+    {
+        try {
+            player = new Player(Global.saveData);
+        } catch (Exception e) {
+            player = new Player();
+        }
+    }
 
     /**
      * 存放滑块的集合

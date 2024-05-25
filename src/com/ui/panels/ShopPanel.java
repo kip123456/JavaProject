@@ -22,16 +22,27 @@ import com.Controller;
  */
 public class ShopPanel extends JPanel {
 
-    int buyedTimes = 0;
+    int buyedTimes = Global.saveData.buyedTimes;
+
+    public int getBuyedTimes() {
+        return this.buyedTimes;
+    }
+
+    public void setBuyedTimes(int buyedTimes) {
+		this.buyedTimes = buyedTimes;
+        Global.saveData.buyedTimes = buyedTimes;
+	};
     JButton highlightButton;
     JPanel innerPanel;
     JLabel label;
     Controller controller;
     Runnable todo;
 
+    
+
     public void pre() {
         SwingUtilities.invokeLater(() -> {
-            label.setText("Exp: " + controller.player.getExp() + "  Price: " + (5 + buyedTimes));
+            label.setText("Exp: " + controller.player.getExp() + "  Price: " + (5 + getBuyedTimes()));
         });
     }
     public ShopPanel(Dimension size,Controller controller) {
@@ -144,12 +155,13 @@ public class ShopPanel extends JPanel {
         button4.setBackground(Color.BLACK);
         button4.setPreferredSize(new Dimension(size.width/3, 50));
         button4.addActionListener((e) -> {
-            if(controller.player.getExp() < 5 + buyedTimes) {
+            if(controller.player.getExp() < 5 + getBuyedTimes()) {
                 SwingUtilities.invokeLater(() -> {
                     JOptionPane.showMessageDialog(null, "您的经验不足，无法购买！", "提示", JOptionPane.WARNING_MESSAGE);
                 });
             } else {
-                controller.player.setExp(controller.player.getExp() - 5 - buyedTimes);
+                controller.player.setExp(controller.player.getExp() - 5 - getBuyedTimes());
+                setBuyedTimes(getBuyedTimes() + 1);
                 todo.run();
                 controller.setUIMode(controller.lastMode);
             }

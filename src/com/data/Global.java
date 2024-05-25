@@ -1,4 +1,8 @@
 package com.data;
+
+import com.SaveData;
+import com.Saver;
+
 public class Global {
     public static final int TICK_PER_SEC = 50;
     public static final int CHANNEL_WIDTH = 4;
@@ -23,4 +27,10 @@ public class Global {
     public static final int[][] monsterChosen = {{0,1,4,8,9,12,14,20},{2,5,13,60,16,65,6},{3,7,10,11,15,66,30},{30,18,21,23,19,22,28}};
     public static final int stage_num = 5;
     public static final int stage_tick[] = {0,1000,2000,3000,4000};
+
+    public static SaveData saveData;
+    static {
+        saveData = Saver.load();
+        if(saveData == null) saveData = new SaveData();
+    }
 }

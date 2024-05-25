@@ -10,6 +10,8 @@ import java.io.OutputStream;
 
 import com.data.Path;
 
+
+// 只需更改Global.saveData即可保存所需数据
 public class Saver {
     public static void save(SaveData s)
     {
