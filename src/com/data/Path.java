@@ -10,4 +10,5 @@ public class Path {
     public static final String bgm = "./data/bgm";
     public static final String se = "./data/se";
     public static final String backgroundImg = "./data/img/backgrounds";
+    public static final String save = "./data/save";
 }
