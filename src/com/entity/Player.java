@@ -16,9 +16,93 @@ import com.data.Global;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.concurrent.locks.*;;
 
 public class Player {
-    public int health, defense, attack, magicDefense,money,exp;
+    public int health;
+    public int defense;
+    public int attack;
+    private Lock healthLock;
+    private Lock defenseLock;
+    private Lock attackLock;
+
+    public int getHealth() {
+        healthLock.lock();
+        try {
+            return health;
+        } finally {
+            healthLock.unlock();
+        }
+    }
+
+    public void setHealth(int health) {
+        healthLock.lock();
+        try {
+            this.health = health;
+        } finally {
+            healthLock.unlock();
+        }
+    }
+
+    public int getDefense() {
+        defenseLock.lock();
+        try {
+            return defense;
+        } finally {
+            defenseLock.unlock();
+        }
+    }
+
+    public void setDefense(int defense) {
+        defenseLock.lock();
+        try {
+            this.defense = defense;
+        }
+        finally {
+            defenseLock.unlock();
+        }
+    }
+
+    public int getAttack() {
+        attackLock.lock();
+        try {
+            return attack;
+        }
+        finally {
+            attackLock.unlock();
+        }
+    }
+
+    public void setAttack(int attack) {
+        attackLock.lock();
+        try {
+            this.attack = attack;
+        }
+        finally {
+            attackLock.unlock();
+        }
+    }
+
+    public int  magicDefense,money,exp;
+    private Lock expLock;
+    public int getExp() {
+        expLock.lock();
+        try {
+            return exp;
+        } finally {
+            expLock.unlock();
+        }
+    }
+    public void setExp(int exp) {
+        expLock.lock();
+        try {
+            this.exp = exp;
+        }
+        finally {
+            expLock.unlock();
+        }
+    }
+
     public int posx, posy, posz;
     public int lrSteps;
     public int udSteps;
