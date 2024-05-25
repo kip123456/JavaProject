@@ -213,6 +213,8 @@ public class Controller {
     void damageCaculate()
     {
         int damage = player.attack*player.skill_damage_rate;
+        if(player.skill_hel_damage)
+        damage +=player.health*0.2;
         for(int i=0;i<things.size();++i)
         {
             Thing x = things.get(i);
