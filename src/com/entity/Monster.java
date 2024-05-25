@@ -10,6 +10,10 @@ public class Monster extends Thing {
     final static int INFdamage = 999999999;
     int skill;
     int catagory,hel,atk,def,money,exp,myrow;
+    int id;
+    public int getId() {
+        return id;
+    }
     public Monster(int id,int _posx,int _posy){
         if ((skill & 1) > 0)
             haveHeight = true;
@@ -23,6 +27,7 @@ public class Monster extends Thing {
         myImage = DataManager.monster_img[id/4];
         posx=_posx;
         posy=_posy;
+        this.id = id;
     }
 
     public int getHel() {
