@@ -10,6 +10,7 @@ import com.ui.panels.HomePanel;
 import com.ui.panels.ThingManualPanel;
 import com.ui.panels.ThingManualPanel.ThingManualInfo;
 import com.ui.panels.MissionSelectPanel;
+import com.ui.panels.ShopPanel;
 import com.ui.panels.HelpPanel;
 
 import java.awt.*;
@@ -33,6 +34,7 @@ public class UI {
     ThingManualPanel thingManualPanel;
     MissionSelectPanel missionSelectPanel;
     HelpPanel helpPanel;
+    ShopPanel shopPanel;
     Controller controller;
     UIMode mode = UIMode.HOME;
 
@@ -53,6 +55,10 @@ public class UI {
                 break;
             case HELP:
                 frame.add(helpPanel);
+                break;
+            case SHOP:
+                shopPanel.pre();
+                frame.add(shopPanel);
                 break;
             default:
                 break;
@@ -76,6 +82,9 @@ public class UI {
                 break;
             case HELP:
                 frame.remove(helpPanel);
+                break;
+            case SHOP:
+                frame.remove(shopPanel);
                 break;
             default:
                 break;
@@ -195,8 +204,11 @@ public class UI {
                         "残虐：当血量低于怪物血量时，伤害翻倍\r\n" + //
                         "净化：造成角色魔防两倍的伤害");
 
+        shopPanel = new ShopPanel(controller);
+
 
         frame.add(homePanel);
+
 
         frame.setSize(Global.WINDOW_WIDTH, Global.WINDOW_WIDTH);
 
@@ -233,6 +245,16 @@ public class UI {
                     }
                     controller.ui_lock.unlock();
                 } 
+                if(e.getKeyChar() == 'g') {
+                    controller.ui_lock.lock();
+                    if(controller.uiMode == UIMode.SHOP) {
+                        // do nothing
+                    } else {
+                        controller.lastMode = controller.uiMode;
+                        controller.uiMode = UIMode.SHOP;
+                    }
+                    controller.ui_lock.unlock();
+                }
             }
         });
         frame.setFocusable(true);

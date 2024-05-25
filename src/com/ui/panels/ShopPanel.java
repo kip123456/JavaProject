@@ -29,7 +29,7 @@ public class ShopPanel extends JPanel {
     Controller controller;
     Runnable todo;
 
-    void pre() {
+    public void pre() {
         SwingUtilities.invokeLater(() -> {
             label.setText("Exp: " + controller.player.getExp() + "  Price: " + (5 + buyedTimes));
         });
