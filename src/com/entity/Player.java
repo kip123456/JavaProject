@@ -106,7 +106,7 @@ public class Player {
     public int posx, posy, posz;
     public int lrSteps;
     public int udSteps;
-    public double rate[] = new double[10];
+    public double rate[] = new double[7];
     public int inhurt;
     public int skill_loader;//技能条，10000为一次技能
     public int skill_damage_rate;//技能伤害比率，初始为50倍攻击

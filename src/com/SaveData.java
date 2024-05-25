@@ -1,6 +1,8 @@
 package com;
 
-public class SaveData {
+import java.io.Serializable;
+
+public class SaveData implements Serializable{
     public int coin;
     public boolean[] sp,level;
     SaveData()
@@ -8,13 +10,5 @@ public class SaveData {
         coin = 0;
         sp = new boolean[105];
         level = new boolean[105];
-    }
-    void save()
-    {
-
-    }
-    void load()
-    {
-
     }
 }
