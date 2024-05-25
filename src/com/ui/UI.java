@@ -15,7 +15,12 @@ import com.ui.panels.HelpPanel;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.List;
+
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
 import com.entity.Monster;
 import com.entity.Thing;
@@ -91,19 +96,64 @@ public class UI {
         gamePanel.repaint();
     }
 
+    static Image getMonsterImage(int id) {
+        BufferedImage img = DataManager.monster_img[id/4];
+        int width = img.getWidth(null);
+        int height = img.getHeight(null);
+        return (Image)(img.getSubimage(0, (id%4)*height, width, height));
+    }
+
+    static String[] getMonsterDescription(int id) {
+        int talents = DataManager.monster_data[id][5];
+        /**
+        *  采用二进制方式存储，其中：
+        *  1 ： 浮空
+        *  2 ： 先攻
+        *  4 ： 三连击
+        *  8 ： 魔攻
+        *  16 ： 坚固
+        *  32 ： 破甲（战前附带角色防御90%作为伤害）
+        *  64 ： 模仿（当角色属性更高时，属性等于角色属性）
+        *  128 ：贯杀炮（第10回合造成攻击力1000%的伤害）
+        *  256 : 怨念堆积（攻击+=仇恨值）
+        *  512 ：怨念发酵（造成仇恨值的真伤，并使仇恨值翻倍，当被技能杀死后，仇恨值减半）
+        *  1024 : 残虐（当血量低于怪物血量时，伤害翻倍）
+        *  2048 : 净化（造成角色魔防两倍的伤害）
+        */
+
+        String[] talentsname = new String[12];
+        talentsname[0] = "浮空";
+        talentsname[1] = "先攻";
+        talentsname[2] = "三连击";
+        talentsname[3] = "魔攻";
+        talentsname[4] = "坚固";
+        talentsname[5] = "破甲";
+        talentsname[6] = "模仿";
+        talentsname[7] = "贯杀炮";
+        talentsname[8] = "怨念堆积";
+        talentsname[9] = "怨念发酵";
+        talentsname[10] = "残虐";
+        talentsname[11] = "净化";
+        List<String> ans = new LinkedList<>();
+        for(int i=0;i<12;i++) {
+            if((talents&(1<<i))!=0) {
+                ans.add(talentsname[i]);
+            }
+        }
+        return (String[]) ans.toArray();
+    }
     public void loadThings2ManualPanel(List<Thing> things, Player player) {
         thingManualPanel.removeAll();
-        int i = 0;
+        Set<Integer > ids = new HashSet<Integer>();
         for(Thing thing: things) {
             if(thing instanceof Monster) {
                 Monster monster = (Monster) thing;
+                int id = monster.getId();
+                if(ids.contains(id)) continue;
+                ids.add(id);
                 ThingManualInfo info = new ThingManualInfo(
-                    monster.myImage,
-                    new String[]{
-                        String.valueOf(i*3),
-                        String.valueOf(i*3+1),
-                        String.valueOf(i*3+2)
-                    },
+                    getMonsterImage(id),
+                    getMonsterDescription(id),
                     monster.getHel(),
                     monster.getAtk(player),
                     monster.getDef(player),
@@ -113,7 +163,6 @@ public class UI {
                 );
                 thingManualPanel.insAManual(info);
 
-                i++;
             }
         }
     }
