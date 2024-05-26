@@ -85,6 +85,7 @@ public class Player {
 
     public int  magicDefense,money,exp;
     private Lock expLock=new ReentrantLock();
+    private Lock moneyLock = new ReentrantLock();
     public int getExp() {
         expLock.lock();
         try {
@@ -100,6 +101,25 @@ public class Player {
         }
         finally {
             expLock.unlock();
+        }
+    }
+
+    public int getMoney() {
+        moneyLock.lock();
+        try {
+            return money;
+        } finally {
+            moneyLock.unlock();
+        }
+    }
+    public void setMoney(int money) {
+        moneyLock.lock();
+        try {
+            this.money = money;
+            Global.saveData.coin = money;
+        }
+        finally {
+            moneyLock.unlock();
         }
     }
 
@@ -198,12 +218,14 @@ public class Player {
         msg.money*=2;
         if(rate[5]>0&&rd.nextInt(0, 10)*1.0/10<rate[5])
         msg.exp*=2;
-        health += msg.hel;
-        attack += msg.atk;
-        defense += msg.def;
+
+        setHealth(getHealth() + msg.hel);
+        setAttack(getAttack() + msg.atk);
+        setDefense(getDefense() + msg.def);
         magicDefense += msg.mdef;
-        money += msg.money;
-        exp += msg.exp;
+
+        setMoney(getMoney() + msg.money);
+        setExp(getExp() + msg.exp);
     }
     public void setMove(MovingState direc)
     {

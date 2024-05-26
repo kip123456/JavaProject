@@ -66,6 +66,7 @@ public class UI {
                 frame.add(shopPanel);
                 break;
             case ROUGE:
+                rougePanel.pre();
                 frame.add(rougePanel);
                 break;
             default:
@@ -287,6 +288,7 @@ public class UI {
                 System.exit(0);
             }
         });
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 }
