@@ -6,4 +6,5 @@ public enum UIMode {
     MISSONSELECT,
     HELP,
     SHOP,
+    ROUGE,
 }

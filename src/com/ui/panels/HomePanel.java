@@ -51,7 +51,7 @@ public class HomePanel extends JPanel {
 
             button1.addActionListener((e) -> {
                 Global.saveData = new SaveData();
-                controller.player = new Player();
+                controller.player.loadData(Global.saveData);
                 controller.setUIMode(UIMode.MISSONSELECT);
             });
 

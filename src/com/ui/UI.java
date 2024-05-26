@@ -11,6 +11,7 @@ import com.ui.panels.HomePanel;
 import com.ui.panels.ThingManualPanel;
 import com.ui.panels.ThingManualPanel.ThingManualInfo;
 import com.ui.panels.MissionSelectPanel;
+import com.ui.panels.RougePanel;
 import com.ui.panels.ShopPanel;
 import com.ui.panels.HelpPanel;
 
@@ -40,6 +41,7 @@ public class UI {
     ShopPanel shopPanel;
     Controller controller;
     UIMode mode = UIMode.HOME;
+    private RougePanel rougePanel;
 
     public void addModePanel(UIMode mode) {
         switch (mode) {
@@ -62,6 +64,9 @@ public class UI {
             case SHOP:
                 shopPanel.pre();
                 frame.add(shopPanel);
+                break;
+            case ROUGE:
+                frame.add(rougePanel);
                 break;
             default:
                 break;
@@ -88,6 +93,9 @@ public class UI {
                 break;
             case SHOP:
                 frame.remove(shopPanel);
+                break;
+            case ROUGE:
+                frame.remove(rougePanel);
                 break;
             default:
                 break;
@@ -214,6 +222,7 @@ public class UI {
                         "净化：造成角色魔防两倍的伤害");
 
         shopPanel = new ShopPanel(controller);
+        rougePanel = new RougePanel(controller);
 
 
         frame.add(homePanel);

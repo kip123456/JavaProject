@@ -129,8 +129,8 @@ public class Player {
         skill_loader = 0;
         skill_load_speed = Global.skill_load_speed;
     }
-    public Player(SaveData s) {
-        this();
+
+    public void loadData(SaveData s) {
         money = s.coin;
         for(int i=0;i<=3;++i)
         {
@@ -175,6 +175,10 @@ public class Player {
         rate[4]=0.1;
         if(s.sp[33])
         rate[5]=0.1;
+    }
+    public Player(SaveData s) {
+        this();
+        loadData(s);
     }
     static Random rd = new Random(System.currentTimeMillis());
     public void react(T2PMessage msg) {

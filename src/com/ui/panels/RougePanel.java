@@ -1,42 +1,38 @@
 package com.ui.panels;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import com.Controller;
 import com.data.Global;
 import com.ui.UIMode;
 
-public class MissionSelectPanel extends JPanel {
-
+public class RougePanel extends JPanel {
+    static private final int sp_num = 105;
     private int buttonHeight = 50;
     private int buttonWidth = 200;
     private int buttongGap = 20;
 
     private class InnerPanel extends JPanel {
-        InnerPanel(Dimension size, int missionNum) {
+        InnerPanel(Dimension size) {
             setPreferredSize(size);
             setBackground(Color.WHITE);
             setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));   
 
 
 
-            JButton button0 = new JButton("infinite mode");
-            button0.setFont(new Font("Arial", Font.BOLD, 32));
-            
-            button0.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
-            button0.setMinimumSize(new Dimension(buttonWidth, buttonHeight));
-            button0.setMaximumSize(new Dimension(buttonWidth, buttonHeight));
-            button0.setAlignmentX(Component.CENTER_ALIGNMENT);
-            button0.addActionListener(e -> {
-                controller.setGamemode(0);
-                controller.setUIMode(UIMode.GAMEING);
-            });
-            add(button0);
-            add(Box.createVerticalStrut(buttongGap));
-
-            for(int i = 1;i<=missionNum;i++) {
-                JButton button = new JButton("mission " + i);
+            for(int i = 0; i<sp_num;i++) {
+                JButton button = new JButton("haha " + i);
                 button.setFont(new Font("Arial", Font.BOLD, 32));
                 button.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
                 button.setMinimumSize(new Dimension(buttonWidth, buttonHeight));
@@ -44,8 +40,8 @@ public class MissionSelectPanel extends JPanel {
                 button.setAlignmentX(Component.CENTER_ALIGNMENT);
                 final int finalI = i;
                 button.addActionListener(e -> {
-                    controller.setGamemode(finalI);
-                    controller.setUIMode(UIMode.GAMEING);
+                    Global.saveData.sp[finalI] = true;
+                    controller.player.loadData(Global.saveData);
                 });
                 add(button);
                 add(Box.createVerticalStrut(buttongGap));
@@ -56,8 +52,8 @@ public class MissionSelectPanel extends JPanel {
     Controller controller;
     InnerPanel innerPanel;
 
-    // missionNum 不包括无尽模式
-    public MissionSelectPanel(Controller controller, int missionNum) {
+
+    public RougePanel(Controller controller) {
         super();
         setPreferredSize(new Dimension(Global.WINDOW_WIDTH, Global.WINDOW_WIDTH));
         this.controller = controller;
@@ -74,16 +70,16 @@ public class MissionSelectPanel extends JPanel {
         homeButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(homeButton);
 
-        JButton rougeButton = new JButton();
-        rougeButton.setText("Skill Point");
-        rougeButton.setBounds(110, 0, 100, 30);
-        rougeButton.addActionListener((e) -> {
-            controller.setUIMode(UIMode.ROUGE);
+        JButton backButton = new JButton();
+        backButton.setText("back");
+        backButton.setBounds(110, 0, 100, 30);
+        backButton.addActionListener((e) -> {
+            controller.setUIMode(controller.lastMode);
         });
-        rougeButton.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(rougeButton);
+        backButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        add(backButton);
         
-        innerPanel = this.new InnerPanel(new Dimension(Global.WINDOW_WIDTH/5*3, (missionNum + 1) * (buttonHeight + buttongGap)), missionNum);
+        innerPanel = this.new InnerPanel(new Dimension(Global.WINDOW_WIDTH/5*3, (sp_num + 1) * (buttonHeight + buttongGap)));
         JScrollPane scrollPane = new JScrollPane(innerPanel);
         scrollPane.setBounds(Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5*3, Global.WINDOW_WIDTH/5*3);
         add(scrollPane);
@@ -102,5 +98,4 @@ public class MissionSelectPanel extends JPanel {
         nothing.setPreferredSize(new Dimension(Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5));
         add(nothing, BorderLayout.SOUTH);
     }
-    
 }
