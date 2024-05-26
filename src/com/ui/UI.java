@@ -272,6 +272,7 @@ public class UI {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                Global.saveData.coin = controller.player.money;
                 Saver.save(Global.saveData);
                 System.out.println("saving data");
                 System.exit(0);
