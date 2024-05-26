@@ -49,7 +49,7 @@ public class GenController {
         }
         else
         {
-            double x = a.nextGaussian(now_tick*1.0/length, 1);
+            double x = a.nextGaussian(now_tick*1.0/length, 2);
             if(x<=0)
             {
                 ms.kind[id]=6;

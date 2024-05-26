@@ -22,7 +22,7 @@ import com.Controller;
  */
 public class ShopPanel extends JPanel {
 
-    int buyedTimes = Global.saveData.buyedTimes;
+    int buyedTimes = 0;
 
     public int getBuyedTimes() {
         return this.buyedTimes;
