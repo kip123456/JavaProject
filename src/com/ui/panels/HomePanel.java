@@ -3,8 +3,10 @@ import java.awt.*;
 import javax.swing.*;
 
 import com.Controller;
+import com.SaveData;
 import com.data.Global;
 import com.ui.UIMode;
+import com.entity.Player;
 
 public class HomePanel extends JPanel {
 
@@ -48,6 +50,12 @@ public class HomePanel extends JPanel {
 
 
             button1.addActionListener((e) -> {
+                Global.saveData = new SaveData();
+                controller.player = new Player();
+                controller.setUIMode(UIMode.MISSONSELECT);
+            });
+
+            button2.addActionListener((e) -> {
                 controller.setUIMode(UIMode.MISSONSELECT);
             });
             
