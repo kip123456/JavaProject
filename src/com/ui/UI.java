@@ -66,7 +66,7 @@ public class UI {
                 frame.add(shopPanel);
                 break;
             case ROUGE:
-                rougePanel.pre();
+                rougePanel.flushPanel();
                 frame.add(rougePanel);
                 break;
             default:
