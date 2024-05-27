@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,6 +17,7 @@ import javax.swing.JScrollPane;
 
 
 import com.Controller;
+import com.data.DataManager;
 import com.data.Global;
 import com.ui.UIMode;
 
@@ -38,9 +40,18 @@ public class RougePanel extends JPanel {
         innerPanel = new InnerPanel(new Dimension(Global.WINDOW_WIDTH/5*3, (sp_num + 1) * (buttonHeight + buttongGap)));
         scrollPane = new JScrollPane(innerPanel);
         scrollPane.setBounds(Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5*3, Global.WINDOW_WIDTH/5*3);
+        scrollPane.setOpaque(false);
+        innerPanel.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
         add(scrollPane);
         revalidate();
         repaint();
+    }
+    @Override
+    protected void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        g.drawImage(DataManager.backgroundImg[8], 0, 0,getWidth(),getHeight(),this);
     }
     private class InnerPanel extends JPanel {
         InnerPanel(Dimension size) {

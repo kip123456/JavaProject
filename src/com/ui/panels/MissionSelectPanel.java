@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import com.Controller;
+import com.data.DataManager;
 import com.data.Global;
 import com.ui.UIMode;
 
@@ -12,7 +13,12 @@ public class MissionSelectPanel extends JPanel {
     private int buttonHeight = 50;
     private int buttonWidth = 200;
     private int buttongGap = 20;
-
+    @Override
+    protected void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        g.drawImage(DataManager.backgroundImg[8], 0, 0,getWidth(),getHeight(),this);
+    }
     private class InnerPanel extends JPanel {
         InnerPanel(Dimension size, int missionNum) {
             setPreferredSize(size);
@@ -30,6 +36,7 @@ public class MissionSelectPanel extends JPanel {
             button0.setAlignmentX(Component.CENTER_ALIGNMENT);
             button0.addActionListener(e -> {
                 controller.init();
+                
                 controller.setGamemode(0);
                 controller.setUIMode(UIMode.GAMEING);
             });
@@ -88,6 +95,9 @@ public class MissionSelectPanel extends JPanel {
         innerPanel = this.new InnerPanel(new Dimension(Global.WINDOW_WIDTH/5*3, (missionNum + 1) * (buttonHeight + buttongGap)), missionNum);
         JScrollPane scrollPane = new JScrollPane(innerPanel);
         scrollPane.setBounds(Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5, Global.WINDOW_WIDTH/5*3, Global.WINDOW_WIDTH/5*3);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        innerPanel.setOpaque(false);
         add(scrollPane);
 
         JLabel nothing;
