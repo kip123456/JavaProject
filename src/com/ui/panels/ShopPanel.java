@@ -30,7 +30,6 @@ public class ShopPanel extends JPanel {
 
     public void setBuyedTimes(int buyedTimes) {
 		this.buyedTimes = buyedTimes;
-        Global.saveData.buyedTimes = buyedTimes;
 	};
     JButton highlightButton;
     JPanel innerPanel;

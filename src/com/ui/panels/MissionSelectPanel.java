@@ -29,6 +29,7 @@ public class MissionSelectPanel extends JPanel {
             button0.setMaximumSize(new Dimension(buttonWidth, buttonHeight));
             button0.setAlignmentX(Component.CENTER_ALIGNMENT);
             button0.addActionListener(e -> {
+                controller.init();
                 controller.setGamemode(0);
                 controller.setUIMode(UIMode.GAMEING);
             });
@@ -44,6 +45,7 @@ public class MissionSelectPanel extends JPanel {
                 button.setAlignmentX(Component.CENTER_ALIGNMENT);
                 final int finalI = i;
                 button.addActionListener(e -> {
+                    controller.init();
                     controller.setGamemode(finalI);
                     controller.setUIMode(UIMode.GAMEING);
                 });

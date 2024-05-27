@@ -5,11 +5,9 @@ import java.io.Serializable;
 public class SaveData implements Serializable{
     public int coin;
     public boolean[] sp,level;
-    public int buyedTimes;
     public SaveData()
     {
         coin = 0;
-        buyedTimes = 0;
         sp = new boolean[105];
         level = new boolean[105];
     }

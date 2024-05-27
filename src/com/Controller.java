@@ -87,7 +87,6 @@ public class Controller {
     /*
      * 从0开始，每一个阶段最多10种怪物
      */
-    int Monster_Stage = 0;
     Random rand = new Random(System.currentTimeMillis());
 
     
@@ -365,5 +364,20 @@ public class Controller {
         g.setColor(Color.red);
         g.fillRect(270, 120,(int)(1.0*bossHel/maxbossHel*404),15);
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+    }
+    public void init()
+    {
+        gameover = 0;
+        bossHel = 1000;
+        maxbossHel = 1000;
+        now_stage = 0;
+        Global.hateValue = 0;
+        try {
+            player = new Player(Global.saveData);
+        } catch (Exception e) {
+            player = new Player();
+        }
+        things = new LinkedList<>();
+        ticks_already = 0;
     }
 }
