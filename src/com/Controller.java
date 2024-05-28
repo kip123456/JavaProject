@@ -1,6 +1,7 @@
 package com;
 import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -36,7 +37,7 @@ public class Controller {
      * 1 玩家胜利
      * 2 玩家失败
      */
-    int gameover = 0,bossHel=1000,maxbossHel=1000;
+    int gameover = 0,bossHel=10000,maxbossHel=10000;
     /*
      * 有且仅有now_stage stage_tick[] stage_hel/atk/...[] 为从1开始计数
      */
@@ -174,6 +175,8 @@ public class Controller {
             if(ticks_already >= Global.stage_tick[now_stage])
             {
                 ++now_stage;
+                bossHel*=2;
+                maxbossHel*=2;
                 genController.set(now_stage-1, Global.stage_tick[now_stage]-ticks_already, 
                 DataManager.stage_hel[now_stage], 
                 DataManager.stage_atk[now_stage],
@@ -322,7 +325,7 @@ public class Controller {
      * 判断游戏是否结束（或者之类的？）
      */
     void judge() {
-        if(getGamemode() == 0)return;
+        // if(getGamemode() == 0)return;
 
         if(player.health <=0) {
             System.out.println("Game Over!");
@@ -357,6 +360,14 @@ public class Controller {
     }
     public void bossHelBar(Graphics g)
     {
+        if(gameover == 2)
+        {
+            g.drawImage(DataManager.backgroundImg[9], 200,200,600,600, null);
+        }
+        if(gameover == 1)
+        {
+            g.drawImage(DataManager.backgroundImg[10], 200,200,600,600, null);
+        }
         Graphics2D g2d = (Graphics2D) g;
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
         g.setColor(Color.black);
@@ -368,8 +379,8 @@ public class Controller {
     public void init()
     {
         gameover = 0;
-        bossHel = 1000;
-        maxbossHel = 1000;
+        bossHel = 10000;
+        maxbossHel = 10000;
         now_stage = 0;
         Global.hateValue = 0;
         try {

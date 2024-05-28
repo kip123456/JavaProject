@@ -64,6 +64,7 @@ public class Monster extends Thing {
         int turns = hel / (p.attack - def);
         if(hel % (p.attack - def) != 0)
             ++ turns;
+        --turns;
         int damage = 0;
         //破甲处理
         if((skill & 32) > 0)damage += (int)(0.9*p.defense);

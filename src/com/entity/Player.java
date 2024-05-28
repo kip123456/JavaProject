@@ -137,7 +137,7 @@ public class Player {
     public Player() {
         health = 300;
         defense = 10;
-        attack = 10;
+        attack = 111110;
         magicDefense = 10;
         lrSteps = udSteps = 0;
         posx = 0;
