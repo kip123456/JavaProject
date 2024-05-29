@@ -46,6 +46,7 @@ public class UI {
     public void addModePanel(UIMode mode) {
         switch (mode) {
             case HOME:
+                DataManager.bgm[1].setMicrosecondPosition(0);
                 frame.add(homePanel);
                 break;
             case GAMEING:
