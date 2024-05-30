@@ -30,7 +30,7 @@ public class Controller {
     public UIMode uiMode = UIMode.HOME;
     public Lock ui_lock = new ReentrantLock();
 
-    UI ui;
+    public UI ui;
 
     /**
      * 0 没有结束
@@ -390,5 +390,6 @@ public class Controller {
         }
         things = new LinkedList<>();
         ticks_already = 0;
+        ui.init();
     }
 }

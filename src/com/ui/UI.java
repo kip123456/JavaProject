@@ -32,7 +32,7 @@ import com.entity.Thing;
 import com.entity.Player;
 
 public class UI {
-    JFrame frame;
+    public JFrame frame;
     GamePanel gamePanel;
     HomePanel homePanel;
     ThingManualPanel thingManualPanel;
@@ -42,6 +42,11 @@ public class UI {
     Controller controller;
     UIMode mode = UIMode.HOME;
     private RougePanel rougePanel;
+
+    // call this when first start a game
+    public void init() {
+        shopPanel.init();
+    }
 
     public void addModePanel(UIMode mode) {
         switch (mode) {
@@ -208,7 +213,7 @@ public class UI {
         helpPanel.addHelpMessage("w：跳跃");
         helpPanel.addHelpMessage("x：怪物手册，再次按x返回");
         helpPanel.addHelpMessage("f：技能");
-        helpPanel.addHelpMessage("g：商店");
+        helpPanel.addHelpMessage("g：商店,再次按g返回");
         helpPanel.addHelpMessage("          机制说明");
         helpPanel.addHelpMessage("角色存在技能条（攻击属性旁），充满时会有音效提示");
         helpPanel.addHelpMessage("角色技能：对前方造成50（初始）倍攻击的伤害");
@@ -268,7 +273,8 @@ public class UI {
                 if(e.getKeyChar() == 'g') {
                     controller.ui_lock.lock();
                     if(controller.uiMode == UIMode.SHOP) {
-                        // do nothing
+                        controller.uiMode = controller.lastMode;
+                        controller.lastMode = UIMode.SHOP;
                     } else {
                         controller.lastMode = controller.uiMode;
                         controller.uiMode = UIMode.SHOP;

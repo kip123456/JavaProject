@@ -37,8 +37,12 @@ public class ShopPanel extends JPanel {
     Controller controller;
     Runnable todo;
 
-    
+    // call this when first start a game
+    public void init() {
+        buyedTimes = 0;
+    }
 
+    // call this before switching to ShopPanel
     public void pre() {
         SwingUtilities.invokeLater(() -> {
             label.setText("Exp: " + controller.player.getExp() + "  Price: " + (5 + getBuyedTimes()));
@@ -157,30 +161,34 @@ public class ShopPanel extends JPanel {
             if(controller.player.getExp() < 5 + getBuyedTimes()) {
                 SwingUtilities.invokeLater(() -> {
                     JOptionPane.showMessageDialog(null, "您的经验不足，无法购买！", "提示", JOptionPane.WARNING_MESSAGE);
+                    controller.ui.frame.requestFocusInWindow();
                 });
             } else {
                 controller.player.setExp(controller.player.getExp() - 5 - getBuyedTimes());
                 setBuyedTimes(getBuyedTimes() + 1);
                 todo.run();
-                controller.setUIMode(controller.lastMode);
+                SwingUtilities.invokeLater(() -> {
+                    JOptionPane.showMessageDialog(null, "购买成功！", "提示", JOptionPane.INFORMATION_MESSAGE);
+                    controller.ui.frame.requestFocusInWindow();
+                });
             }
         });
         innerPanel.add(button4);
         innerPanel.add(Box.createVerticalStrut(buttonGap));
 
-        JButton button5;
+        // JButton button5;
 
-        button5 = new JButton();
-        button5.setForeground(Color.WHITE);
-        button5.setText("返回");
-        button5.setFont(new Font("SimSun", Font.BOLD, 32));
-        button5.setBackground(Color.BLACK);
-        button5.setPreferredSize(new Dimension(size.width/3, 50));
-        button5.addActionListener((e) -> {
-            controller.setUIMode(controller.lastMode);
-        });
-        innerPanel.add(button5);
-        innerPanel.add(Box.createVerticalStrut(buttonGap));
+        // button5 = new JButton();
+        // button5.setForeground(Color.WHITE);
+        // button5.setText("返回");
+        // button5.setFont(new Font("SimSun", Font.BOLD, 32));
+        // button5.setBackground(Color.BLACK);
+        // button5.setPreferredSize(new Dimension(size.width/3, 50));
+        // button5.addActionListener((e) -> {
+        //     controller.setUIMode(controller.lastMode);
+        // });
+        // innerPanel.add(button5);
+        // innerPanel.add(Box.createVerticalStrut(buttonGap));
     }
 
     public ShopPanel(Controller controller) {
