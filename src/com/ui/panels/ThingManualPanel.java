@@ -41,7 +41,7 @@ public class ThingManualPanel extends JPanel {
             setBackground(new Color(0,0,0,255));
             setLayout(null);
             setBackground(new Color(0,0,0,255));
-            Font font = new Font("Arial", Font.PLAIN, 15);
+            Font font = new Font("宋体", Font.PLAIN, 15);
             setPreferredSize(preferredSize);
             setBorder(BorderFactory.createDashedBorder(Color.WHITE, 3.0f, 3.0f, 3.0f, true));
 
