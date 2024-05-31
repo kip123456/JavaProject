@@ -70,7 +70,7 @@ public class GenController {
         --ticklst;
         if(ticklst <= 0)
         {
-            ticklst = length / 10;
+            ticklst = 100;
             diflst = a.nextInt(0, 4);
             for(int i=0;i<myvar.length;++i)myvar[i]=0;
             if(diflst==1)
