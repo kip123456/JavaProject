@@ -170,6 +170,7 @@ public class ShopPanel extends JPanel {
                 SwingUtilities.invokeLater(() -> {
                     JOptionPane.showMessageDialog(null, "购买成功！", "提示", JOptionPane.INFORMATION_MESSAGE);
                     controller.ui.frame.requestFocusInWindow();
+                    pre();
                 });
             }
         });
