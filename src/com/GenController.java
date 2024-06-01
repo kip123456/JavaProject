@@ -49,7 +49,7 @@ public class GenController {
         }
         else
         {
-            double x = a.nextGaussian(now_tick*1.0/length, 2);
+            double x = a.nextGaussian(now_tick*1.0*upmonsterNum/length, 2);
             if(x<=0)
             {
                 ms.kind[id]=6;
@@ -70,7 +70,7 @@ public class GenController {
         --ticklst;
         if(ticklst <= 0)
         {
-            ticklst = length / 10;
+            ticklst = 100;
             diflst = a.nextInt(0, 4);
             for(int i=0;i<myvar.length;++i)myvar[i]=0;
             if(diflst==1)

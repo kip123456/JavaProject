@@ -26,7 +26,7 @@ public class Global {
     public static final int missionNum = 10;
     public static final int[][] monsterChosen = {{0,1,4,8,9,12,14,20},{2,5,13,60,16,65,6},{3,7,10,11,15,66,30},{30,18,21,23,19,22,28}};
     public static final int stage_num = 5;
-    public static final int stage_tick[] = {0,1000,2000,3000,4000};
+    public static final int stage_tick[] = {0,1200,2400,3600,99999};
 
     public static SaveData saveData;
     static {
