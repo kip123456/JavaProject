@@ -262,7 +262,7 @@ public class UI {
                 if(e.getKeyChar() == 'x') {
                     controller.ui_lock.lock();
                     if(controller.uiMode == UIMode.MANUAL) {
-                        controller.uiMode = controller.lastMode;
+                        controller.uiMode = UIMode.GAMEING;
                         controller.lastMode = UIMode.MANUAL;
                     } else {
                         controller.lastMode = controller.uiMode;
@@ -273,7 +273,7 @@ public class UI {
                 if(e.getKeyChar() == 'g') {
                     controller.ui_lock.lock();
                     if(controller.uiMode == UIMode.SHOP) {
-                        controller.uiMode = controller.lastMode;
+                        controller.uiMode = UIMode.GAMEING;
                         controller.lastMode = UIMode.SHOP;
                     } else {
                         controller.lastMode = controller.uiMode;
