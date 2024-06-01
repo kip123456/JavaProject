@@ -58,6 +58,7 @@ public class UI {
                 frame.add(gamePanel);
                 break;
             case MANUAL:
+                DataManager.bgm[1].start();
                 loadThings2ManualPanel(controller.things, controller.player);
                 frame.add(thingManualPanel);
                 break;
@@ -68,6 +69,7 @@ public class UI {
                 frame.add(helpPanel);
                 break;
             case SHOP:
+                DataManager.bgm[1].start();
                 shopPanel.pre();
                 frame.add(shopPanel);
                 break;
