@@ -27,7 +27,7 @@ public class MissionSelectPanel extends JPanel {
 
 
 
-            JButton button0 = new JButton("infinite mode");
+            JButton button0 = new JButton("mission 0");
             button0.setFont(new Font("Arial", Font.BOLD, 32));
             
             button0.setPreferredSize(new Dimension(buttonWidth, buttonHeight));
