@@ -1,0 +1,50 @@
+@startuml switch_panel
+
+class HomePanel {
+
+}
+
+class HelpPanel {
+
+}
+
+class ThingManualPanel{
+
+}
+
+class MissionSelectPanel{
+
+}
+
+class RougePanel {
+
+}
+class ShopPanel {
+
+}
+
+class GamePanel {
+}
+
+class UI {
+    +removeModePanel(mode : UIMode)
+    +addModePanel(mode : UIMode)
+    +setMode(mode : UIMode)
+    +repaint()
+}
+
+class Controller {
+    uiMode : UIMode
+    +setUIMode(mode : UIMode)
+}
+
+Controller --- UI
+UI o-- HomePanel
+UI o-- HelpPanel
+UI o-- ThingManualPanel
+UI o-- MissionSelectPanel
+UI o-- RougePanel
+UI o-- ShopPanel
+UI o-- GamePanel
+
+@enduml

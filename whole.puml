@@ -1,0 +1,40 @@
+@startuml whole
+class Controller {
+    +work()
+    +gamework()
+    +generateThings()
+    +moveThing()
+    +intereact()
+    +judge()
+    +repaint()
+}
+
+class UI {
+    +addModePanel(mode : UIMode)
+    +removeModePanel(mode : UIMode)
+    +repaint()
+}
+
+class GamePanel {
+    +paintComponent(g : Graphics)
+}
+
+class Player {
+    +react(msg : T2PMessage)
+    +move(se : SEController)
+    +repaint(g : Graphics)
+}
+
+class Monster {
+    +intereact(p : Player)
+    +repaint(g : Graphics)
+}
+
+Controller --- UI
+GamePanel --- UI
+Controller --- Player
+Controller --- Monster
+Player --- Monster
+
+
+@enduml
